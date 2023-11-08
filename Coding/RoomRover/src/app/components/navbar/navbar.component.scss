@@ -1,0 +1,19 @@
+.toolbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #DD5F18;
+    color: white;
+
+    i.bi{
+        font-size: 25px;
+        margin-left: 85vw;
+    }
+    h2{
+        margin-left: 25px;
+    }
+}
