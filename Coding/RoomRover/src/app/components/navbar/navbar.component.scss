@@ -1,3 +1,8 @@
+@font-face {
+    font-family: inter;
+    src: url(../../../assets/fonts/Inter-Medium.ttf);
+}
+
 .toolbar{
     position: absolute;
     top: 0;
@@ -6,14 +11,18 @@
     height: 60px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: #DD5F18;
     color: white;
+    padding: 10px 0 10px 0;
 
     i.bi{
-        font-size: 25px;
-        margin-left: 85vw;
+        font-size: 30px;
+        margin-right: 30px;
     }
-    h2{
-        margin-left: 25px;
+    p{
+        margin-left: 30px;
+        font-family: inter;
+        font-size: 20px;
     }
-}
+}   
