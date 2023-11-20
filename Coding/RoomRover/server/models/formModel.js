@@ -1,9 +1,20 @@
 const connection = require("../services/database/databaseConnection");
-class formModel {
+
+class FormModel {
   listar() {
-    const sql = "SELECT * FROM atendiment"
-    return this.connection.query();
+    const sql = "SELECT * FROM roomrover.client;";
+    return new Promise((resolve, reject) => {
+      connection.query(sql, {}, (error, response) => {
+        if (error) {
+          reject(error);
+          return;
+        } else {
+          console.log("deu certo");
+          resolve(response);
+        }
+      });
+    });
   }
 }
 
-module.exports = formModel();
+module.exports = FormModel;

@@ -1,7 +1,11 @@
+const formModel = require("../models/formModel");
+
+const formModelInstance = new formModel()
+
 class formController {
   insertFormData() {
-    return "inserindo dados";
-  }
+    formModelInstance.listar();
+}
   updateData(id) {
     return `update data of ${id}`;
   }
