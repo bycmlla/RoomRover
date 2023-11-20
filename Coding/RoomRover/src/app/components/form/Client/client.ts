@@ -2,7 +2,7 @@ export class Client {
   name: string = '';
   email: string = '';
   phone: string = '';
-  birthdate: Date = new Date();
+  birthdate: string = '';
   nationality: string = '';
   gender: string = '';
   password: string = '';
