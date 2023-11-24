@@ -2,20 +2,28 @@ const { Router } = require("express");
 const router = Router();
 const formController = require("../controllers/formController");
 
-router.get("/form", (req, res) => {
-  const response = formController.insertFormData();
-  res.send(response);
+router.get("/form", async (req, res) => {
+  try {
+    const response = await formController.insertFormData(req.body);
+    console.log(response ?? "none");
+    res.send(response);
+  } 
+  catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
-router.post("/form", (req, res) => {
-  const response = formController.updateData();
-  res.send(response);
-});
-
-router.get("/form/:id", (req, res) => {
-  const { id } = req.params;
-  const response = formController.deleteData(id);
-  res.send(response);
+router.get("/form/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await formController.deleteFormData(id);
+    console.log(response ?? "none");
+    res.send(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 module.exports = router;
