@@ -4,7 +4,7 @@ const formController = require("../controllers/formController");
 
 router.get("/form", async (req, res) => {
   try {
-    const response = await formController.insertFormData(req.body);
+    const response = await formController.insertFormData();
     console.log(response ?? "none");
     res.send(response);
   } 

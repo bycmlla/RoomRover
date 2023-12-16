@@ -4,9 +4,9 @@ const formModelInstance = new formModel();
 
 class formController {
   
-  async insertFormData(data) {
+  async insertFormData() {
     try {
-      const response = await formModelInstance.insert(data);
+      const response = await formModelInstance.insert();
       console.log(response);
       return response;
     } catch (error) {
