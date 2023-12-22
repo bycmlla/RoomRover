@@ -4,7 +4,7 @@ const formModelInstance = new formModel()
 
 class formController {
   insertFormData() {
-    formModelInstance.listar();
+    formModelInstance.insert();
 }
   updateData(id) {
     return `update data of ${id}`;

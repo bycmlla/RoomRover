@@ -1,18 +1,27 @@
 const connection = require("../services/database/databaseConnection");
 
 class FormModel {
-  listar() {
-    const sql = "SELECT * FROM roomrover.client;";
+  insert() {
+    const country = "brasil";
+    const adress = "rua tal";
+    const city = "cidade tal";
+    const zipcode = "934823";
+
+    const sql =
+      "INSERT INTO `roomrover`.`adress` (`country`, `adress`, `city`, `zipcode`) VALUES (?, ?, ?, ?);";
     return new Promise((resolve, reject) => {
-      connection.query(sql, {}, (error, response) => {
-        if (error) {
-          reject(error);
-          return;
-        } else {
-          console.log("deu certo");
-          resolve(response);
+      connection.query(
+        sql,
+        [country, adress, city, zipcode],
+        (error, response) => {
+          if (error) {
+            reject(error);
+          } else {
+            console.log("deu certo");
+            resolve(response);
+          }
         }
-      });
+      );
     });
   }
 }
