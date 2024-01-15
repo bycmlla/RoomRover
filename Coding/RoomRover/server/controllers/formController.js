@@ -7,7 +7,7 @@ class formController {
     formModelInstance.insert();
 }
   updateData(id) {
-    return `update data of ${id}`;
+    return formModelInstance.update(id)
   }
 
   deleteData(id) {

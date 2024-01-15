@@ -7,15 +7,19 @@ router.get("/form", (req, res) => {
   res.send(response);
 });
 
-router.post("/form", (req, res) => {
-  const response = formController.updateData();
-  res.send(response);
-});
-
-router.get("/form/:id", (req, res) => {
+router.get("/form/:id", async (req, res) => {
   const { id } = req.params;
-  const response = formController.deleteData(id);
-  res.send(response);
+  try {
+    const response = await formController.updateData(id);
+    res.send(response);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
+// router.get("/form/:id", (req, res) => {
+//   const { id } = req.params;
+//   const response = formController.deleteData(id);
+//   res.send(response);
+// });
 
 module.exports = router;
