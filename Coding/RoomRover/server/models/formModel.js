@@ -25,6 +25,26 @@ class FormModel {
       );
     });
   }
+
+  update(id) {
+    const country = "CANADÁ";
+    let sql = `UPDATE \`roomrover\`.\`adress\` SET \`country\` = '${country}' WHERE \`idadress\` = ${id}`;
+    return new Promise((resolve, reject) => {
+      connection.query(sql, (error, response) => {
+        if (error) {
+          reject(error);
+        } else {
+          console.log("atualizou");
+          resolve(response);
+        }
+      });
+    });
+  }
 }
 
 module.exports = FormModel;
+
+//está na branch third, onde deu certo a inserção e o console do angular
+//ta retornando correto tambem, com os dados aparecendo no console.
+//não lembro se dei commit na main tambem, pq a third é apenas pra guardar
+// o ultimo estado que deu certo, no caso, as inserçoes
