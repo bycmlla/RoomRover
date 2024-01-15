@@ -16,10 +16,5 @@ router.get("/form/:id", async (req, res) => {
     res.status(500).send(error.message);
   }
 });
-// router.get("/form/:id", (req, res) => {
-//   const { id } = req.params;
-//   const response = formController.deleteData(id);
-//   res.send(response);
-// });
 
 module.exports = router;

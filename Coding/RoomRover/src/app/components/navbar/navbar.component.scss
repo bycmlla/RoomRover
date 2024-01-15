@@ -1,28 +1,38 @@
 @font-face {
+  font-family: inter;
+  src: url(../../../assets/fonts/Inter-Medium.ttf);
+}
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #dd5f18;
+  color: white;
+  padding: 10px;
+
+  .logo-name {
     font-family: inter;
-    src: url(../../../assets/fonts/Inter-Medium.ttf);
+    font-size: 20px;
+    margin-right: auto;
+  }
 }
 
-.toolbar{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #DD5F18;
-    color: white;
-    padding: 10px 0 10px 0;
+.actions {
+  display: flex;
+  align-items: center;
 
-    i.bi{
-        font-size: 30px;
-        margin-right: 30px;
-    }
-    .logo-name{
-        margin-left: 30px;
-        font-family: inter;
-        font-size: 20px;
-    }
-}   
+  .bi {
+    font-size: 30px;
+    margin-left: 20px;
+  }
+
+  .register {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+}
