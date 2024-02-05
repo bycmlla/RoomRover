@@ -10,9 +10,9 @@ server.use(bodyParser.json());
 router(server);
 
 server.listen(port, (error) => {
-  if (error) {disc
-    console.log("Error");
+  if (error) {
+    console.log("Error:", error); 
     return;
   }
-  console.log(`Is alright! On the port: ${port}`);
+  console.log(`All good! Running on port: ${port}`);
 });
