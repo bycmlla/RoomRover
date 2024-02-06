@@ -1,18 +1,17 @@
 const express = require("express");
 const server = express();
-const port = 3000;
+const PORT = process.env.PORT || 8080;
 const router = require("./api/mainRouter");
-const cors = require('cors');
+const cors = require("cors");
 const bodyParser = require("body-parser");
 
-server.use(cors());
+server.use(cors()); // Configuração mais simples
+
 server.use(bodyParser.json());
+server.use(express.urlencoded({ extended: true }));
+
 router(server);
 
-server.listen(port, (error) => {
-  if (error) {
-    console.log("Error:", error); 
-    return;
-  }
-  console.log(`All good! Running on port: ${port}`);
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });

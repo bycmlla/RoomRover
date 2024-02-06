@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 export class ApiserviceService {
   constructor(private _http: HttpClient) {}
 
-  apiUrl = 'http://localhost:3000';
+  apiUrl = 'http://localhost:8080';
 
-  createData(data:any): Observable<any> {
-    console.log(data, 'createapi=>')
-    return this._http.post(`${this.apiUrl}`, data);
+  createData(data: any): Observable<any> {
+    console.log(data, 'createapi=>');
+    return this._http.post(`${this.apiUrl}/form`, data);
   }
 }

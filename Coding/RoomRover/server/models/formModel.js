@@ -1,30 +1,27 @@
 const connection = require("../services/database/databaseConnection");
 
 class FormModel {
-  insert() {
-    const country = "alemanha";
-    const adress = "rua tal";
-    const city = "cidade tal";
-    const zipcode = "934823";
+  insertData = (data) => {
+    const { name, email, telefone, datanascimento, nacionalidade, genero } = data;
 
     const sql =
-      "INSERT INTO `roomrover`.`adress` (`country`, `adress`, `city`, `zipcode`) VALUES (?, ?, ?, ?);";
+      "INSERT INTO `roomrover`.`user` (`name`, `email`, `telefone`, `datanascimento`, `nacionalidade`, `genero`) VALUES (?, ?, ?, ?, ?, ?);";
+
     return new Promise((resolve, reject) => {
       connection.query(
         sql,
-        [country, adress, city, zipcode],
+        [name, email, telefone, datanascimento, nacionalidade, genero],
         (error, response) => {
           if (error) {
             reject(error);
           } else {
-            console.log("deu certo");
+            console.log("Dados inseridos");
             resolve(response);
           }
         }
       );
     });
-  }
-
+  };
   update(id) {
     const country = "CANADÁ";
     let sql = `UPDATE \`roomrover\`.\`adress\` SET \`country\` = '${country}' WHERE \`idadress\` = ${id}`;
