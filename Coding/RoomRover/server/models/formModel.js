@@ -2,6 +2,12 @@ const connection = require("../services/database/databaseConnection");
 
 class FormModel {
   insert() {
+
+    let details = {
+      nome: req
+    }
+
+
     const country = "alemanha";
     const adress = "rua tal";
     const city = "cidade tal";
@@ -47,3 +53,16 @@ module.exports = FormModel;
 //ta retornando correto tambem, com os dados aparecendo no console.
 //não lembro se dei commit na main tambem, pq a third é apenas pra guardar
 // o ultimo estado que deu certo, no caso, as inserçoes
+
+// server.post("/api/studant/add", (req, res) => {
+//   let details = {
+//     stname: req.body.stname,
+//     course: req.body.course,
+//     fee: req.body.fee,
+//   }
+//   let sql = "INSERT INTO studant SET ?"
+//   db.query(sql, details, (error) => {
+//     if (error)
+//       res.send("error")
+//   })
+// })

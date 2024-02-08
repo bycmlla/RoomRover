@@ -9,10 +9,6 @@ class formController {
   updateData(id) {
     return formModelInstance.update(id)
   }
-
-  deleteData(id) {
-    return `delete data of ${id}`;
-  }
 }
 
 module.exports = new formController();
