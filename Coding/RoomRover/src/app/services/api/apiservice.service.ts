@@ -1,17 +1,23 @@
+// client.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Client } from '../../components/form/Client/client';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ApiserviceService {
-  constructor(private _http: HttpClient) {}
+export class ClientService {
+  constructor(private http: HttpClient) {}
 
-  apiUrl = 'http://localhost:8080';
+  addClient(client: Client): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post<any>('http://localhost:8080/form/add', client, {
+      headers,
+    });
+  }
 
-  createData(data: any): Observable<any> {
-    console.log(data, 'createapi=>');
-    return this._http.post(`${this.apiUrl}/form`, data);
+  getAllClients(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:8080/form/read');
   }
 }

@@ -5,5 +5,4 @@ export class Client {
   birthdate: string = '';
   nationality: string = '';
   gender: string = '';
-  password: string = '';
 }

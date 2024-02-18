@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const router = Router();
-// const formController = require("../controllers/formController");
 const connection = require("../services/database/databaseConnection");
 
-router.get("/form/add", (req, res) => {
+router.post("/form/add", (req, res) => {
+  console.log("Dados recebidos no servidor:", req.body);
   let details = {
     name: req.body.nome,
     email: req.body.email,
@@ -12,43 +12,40 @@ router.get("/form/add", (req, res) => {
     nationality: req.body.nacionalidade,
     gender: req.body.genero,
   };
-  
+  console.log(details);
   let sql = "INSERT INTO test.users SET ?";
 
   connection.query(sql, details, (error, response) => {
     if (error) {
+      console.error("Erro ao criar:", error);
       res.status(500).send({ status: false, message: "Erro ao criar" });
     } else {
       console.log("Deu certo");
-      res.status(200).send({ status: true, message: "Registro criado com sucesso" });
+      res.setHeader("Content-Type", "application/json");
+      res
+        .status(200)
+        .send({ status: true, message: "Registro criado com sucesso" });
     }
   });
-
-  // const response = formController.insertFormData();
-  // res.send(response);
 });
 
-router.get("/form", (req, res) => {
-  const sql = "SELECT * FROM test.users"
-  // Lógica para obter todos os dados do formulário
+router.get("/form/read", (req, res) => {
+  const sql = "SELECT * FROM test.users";
   connection.query(sql, (error, result) => {
     if (error) {
-      res.status(500).send({ status: false, message: "Erro ao obter dados do formulário" });
+      res
+        .status(500)
+        .send({ status: false, message: "Erro ao obter dados do formulário" });
     } else {
-      res.status(200).send({ status: true, data: result, message: "Dados do formulário obtidos com sucesso" });
+      res
+        .status(200)
+        .send({
+          status: true,
+          data: result,
+          message: "Dados do formulário obtidos com sucesso",
+        });
     }
   });
 });
-
-
-// router.get("/form/:id", async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     const response = await formController.updateData(id);
-//     res.send(response);
-//   } catch (error) {
-//     res.status(500).send(error.message);
-//   }
-// });
 
 module.exports = router;

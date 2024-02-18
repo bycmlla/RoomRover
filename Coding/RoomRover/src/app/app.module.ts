@@ -6,8 +6,10 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormComponent } from './components/form/form.component';
 import {HttpClientModule} from '@angular/common/http';
-import { ApiserviceService } from './services/api/apiservice.service';
+import { ClientService } from './services/api/apiservice.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Client } from './components/form/Client/client';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     BrowserAnimationsModule
   ],
-  providers: [ApiserviceService],
+  providers: [ClientService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

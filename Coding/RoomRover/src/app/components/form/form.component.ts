@@ -1,7 +1,8 @@
+// form.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/components/form/Client/client';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { ClientService } from '../../services/api/apiservice.service';
 
 @Component({
   selector: 'app-form',
@@ -13,43 +14,12 @@ export class FormComponent implements OnInit {
   isResultLoaded = false;
   formClient!: FormGroup;
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private clientService: ClientService) {
     this.getAllStudent();
   }
 
   ngOnInit(): void {
     this.createForm(new Client());
-  }
-
-  getAllStudent() {
-    this.http.get('http://localhost:8080/form').subscribe(
-      (resultData: any) => {
-        this.isResultLoaded = true;
-        console.log(resultData.data);
-        this.clientArray = resultData.data;
-      },
-      (error) => {
-        console.log('erro ao buscar dados: ', error);
-      }
-    );
-  }
-
-  register() {
-    console.log('Método register() chamado!');
-    if (this.formClient.valid) {
-      const bodyData = this.formClient.value;
-
-      this.http.post('http://localhost:8080/form/add', bodyData).subscribe({
-        next: (resultData: any) => {
-          console.log(resultData);
-          alert('Sucesso ao registrar');
-          this.getAllStudent();
-        },
-        error: (error) => {
-          console.error('erro ao registrar:', error);
-        },
-      });
-    }
   }
 
   createForm(client: Client) {
@@ -63,7 +33,40 @@ export class FormComponent implements OnInit {
     });
   }
 
+  getAllStudent() {
+    this.clientService.getAllClients().subscribe(
+      (resultData: any) => {
+        this.isResultLoaded = true;
+        console.log(resultData.data);
+        this.clientArray = resultData.data;
+      },
+      (error) => {
+        console.log('erro ao buscar dados: ', error);
+      }
+    );
+  }
+
+  register() {
+    console.log('Dados enviados para o servidor:', this.formClient.value);
+
+    if (this.formClient.valid) {
+      const bodyData = this.formClient.value;
+
+      this.clientService.addClient(bodyData).subscribe({
+        next: (resultData: any) => {
+          console.log(resultData);
+          alert('Sucesso ao registrar');
+          this.getAllStudent();
+        },
+        error: (error) => {
+          console.error('Erro ao registrar:', error);
+        },
+      });
+    }
+  }
+
   onSubmit() {
     console.log(this.formClient.value);
+    this.register();
   }
 }
