@@ -9,13 +9,15 @@ import {HttpClientModule} from '@angular/common/http';
 import { ClientService } from './services/api/apiservice.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Client } from './components/form/Client/client';
+import { HomeComponent } from './pages/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FormComponent
+    FormComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

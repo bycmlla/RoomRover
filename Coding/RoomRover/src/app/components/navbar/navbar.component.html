@@ -1,5 +1,7 @@
 <div class="toolbar">
-  <p class="logo-name">RoomRover.com</p>
+  <p class="logo-name" (click)="onLogoClick()">
+    <a>{{redirectOnLogoClick ? 'RoomRover.com' : 'RoomRover.com'}}</a>
+  </p>
   <div class="actions">
     <a routerLink="form" class="register">Cadastre-se</a>
     <i class="bi bi-question-circle"></i>

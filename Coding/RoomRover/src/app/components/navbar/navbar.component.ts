@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  @Input() redirectOnLogoClick: string = '';
 
+  constructor(private router: Router) {}
+
+  onLogoClick() {
+    if (this.redirectOnLogoClick) {
+      this.router.navigate([this.redirectOnLogoClick]);
+    }
+  }
 }
