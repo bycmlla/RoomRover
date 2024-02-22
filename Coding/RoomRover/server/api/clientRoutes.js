@@ -11,9 +11,10 @@ router.post("/form/add", (req, res) => {
     birthdate: req.body.nascimento,
     nationality: req.body.nacionalidade,
     gender: req.body.genero,
+    password: req.body.senha,
   };
   console.log(details);
-  let sql = "INSERT INTO test.users SET ?";
+  let sql = "INSERT INTO roomrover.client SET ?";
 
   connection.query(sql, details, (error, response) => {
     if (error) {
@@ -30,7 +31,7 @@ router.post("/form/add", (req, res) => {
 });
 
 router.get("/form/read", (req, res) => {
-  const sql = "SELECT * FROM test.users";
+  const sql = "SELECT * FROM roomrover.client";
   connection.query(sql, (error, result) => {
     if (error) {
       res

@@ -2,13 +2,12 @@
   font-family: inter;
   src: url(../../../assets/fonts/Inter-Medium.ttf);
 }
-
 .form {
   display: flex;
   justify-content: center;
-  margin-top: 250px;
+  align-items: center;
   font-family: inter;
-
+  min-height: 100vh;
   .form-row {
     display: flex;
     justify-content: space-between;
@@ -31,6 +30,16 @@
       padding: 10px 100px 10px 10px;
       margin-left: 15px;
     }
+  }
+  .buttonSubmitRegister {
+    background-color: #ff8845;
+    color: white;
+    padding: 8px 80px 8px 80px;
+    border: none;
+    border-radius: 7px;
+    font-size: 15px;
+    margin-top: auto;
+    margin-bottom: auto;
   }
 }
 @media screen and (max-width: 600px) {

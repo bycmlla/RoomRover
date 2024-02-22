@@ -30,6 +30,7 @@ export class FormComponent implements OnInit {
       nascimento: [client.birthdate, Validators.required],
       nacionalidade: [client.nationality, Validators.required],
       genero: [client.gender, Validators.required],
+      senha: [client.password, Validators.required],
     });
   }
 
