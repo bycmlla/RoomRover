@@ -13,6 +13,26 @@ export class FormComponent implements OnInit {
   clientArray: any[] = [];
   isResultLoaded = false;
   formClient!: FormGroup;
+  showAddressForm: boolean = false;
+  showPassportForm: boolean = false;
+
+  toggleAddressForm() {
+    this.showAddressForm = true;
+    this.showPassportForm = false;
+  }
+  
+  togglePassportForm() {
+    this.showAddressForm = false;
+    this.showPassportForm = true;
+  }  
+
+  saveAddress() {
+    this.showAddressForm = false; 
+  }
+
+  savePassport() {
+    this.showPassportForm = false;
+  }
 
   constructor(private fb: FormBuilder, private clientService: ClientService) {
     this.getAllStudent();

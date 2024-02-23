@@ -12,6 +12,7 @@
           formControlName="nome"
         />
       </div>
+
       <div class="form-group">
         <label for="email">E-mail</label>
         <input
@@ -33,6 +34,7 @@
           formControlName="phone"
         />
       </div>
+
       <div class="form-group">
         <label for="nascimento">Data de Nascimento</label>
         <input
@@ -54,6 +56,7 @@
           formControlName="nacionalidade"
         />
       </div>
+
       <div class="form-group">
         <label for="genero">Gênero</label>
         <input
@@ -63,7 +66,38 @@
           formControlName="genero"
         />
       </div>
+    </div>
+
+
+    <div class="form-row">
       <div class="form-group">
+        <span *ngIf="!showAddressForm && !showPassportForm">
+          Endereço
+          <button
+            *ngIf="!showAddressForm && !showPassportForm"
+            type="button"
+            class="btn btn-primary"
+            (click)="toggleAddressForm()"
+          >
+            Inserir
+          </button>
+        </span>
+
+
+        <span *ngIf="!showAddressForm && !showPassportForm">
+          Dados do Passaporte
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="togglePassportForm()"
+          >
+            Inserir
+          </button>
+        </span>
+      </div>
+
+
+      <div class="form-group" *ngIf="!showAddressForm && !showPassportForm">
         <label for="senha">Senha</label>
         <input
           type="password"
@@ -73,7 +107,42 @@
         />
       </div>
     </div>
-    <button class="buttonSubmitRegister" type="submit">Cadastrar</button>
+
+    <div class="form-row" *ngIf="showAddressForm">
+      <div class="form-group">
+        <label for="senha">País</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="País"
+          formControlName="senha"
+        />
+      </div>
+
+
+      <button class="btn btn-success" (click)="saveAddress()">OK</button>
+    </div>
+
+    <div class="form-row" *ngIf="showPassportForm">
+      <div class="form-group">
+        <label for="passportName">Nome no passaporte</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nome no passaporte"
+          formControlName="passportName"
+        />
+      </div>
+      <button class="btn btn-success" (click)="savePassport()">OK</button>
+    </div>
+
+    <button
+      *ngIf="!showAddressForm && !showPassportForm"
+      class="buttonSubmitRegister"
+      type="submit"
+    >
+      Cadastrar
+    </button>
   </div>
 </form>
 
