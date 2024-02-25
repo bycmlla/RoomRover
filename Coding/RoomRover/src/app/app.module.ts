@@ -4,20 +4,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { FormComponent } from './components/form/form.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ClientService } from './services/api/apiservice.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Client } from './components/form/Client/client';
 import { HomeComponent } from './pages/home/home.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FormComponent,
-    HomeComponent
+    HomeComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

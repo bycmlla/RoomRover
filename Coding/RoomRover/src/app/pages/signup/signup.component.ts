@@ -1,15 +1,14 @@
-// form.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Client } from 'src/app/components/form/Client/client';
+import { Client } from 'src/app/models/Client/client';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from '../../services/api/apiservice.service';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss'],
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class FormComponent implements OnInit {
+export class SignupComponent implements OnInit {
   clientArray: any[] = [];
   isResultLoaded = false;
   formClient!: FormGroup;

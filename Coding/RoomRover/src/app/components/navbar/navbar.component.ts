@@ -18,9 +18,9 @@ export class NavbarComponent {
     }
   }
   isNotFormRoute(): boolean {
-    //se retorna true, a rota atual não é form, já que está com o negativo
+    //se retorna true, a rota atual não é signup, já que está com o negativo
     //mas se for, ele retorna false
-    return !this.router.isActive('/form', {
+    return !this.router.isActive('/signup', {
       paths: 'exact',
       queryParams: 'exact',
       fragment: 'ignored',
