@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/models/Client/client';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from '../../services/api/apiservice.service';
+import { Address } from 'src/app/models/Address/address';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
   clientArray: any[] = [];
   isResultLoaded = false;
   formClient!: FormGroup;
+  formAddress!: FormGroup;
   showAddressForm: boolean = false;
   showPassportForm: boolean = false;
 
@@ -19,14 +21,14 @@ export class SignupComponent implements OnInit {
     this.showAddressForm = true;
     this.showPassportForm = false;
   }
-  
+
   togglePassportForm() {
     this.showAddressForm = false;
     this.showPassportForm = true;
-  }  
+  }
 
   saveAddress() {
-    this.showAddressForm = false; 
+    this.showAddressForm = false;
   }
 
   savePassport() {
@@ -38,7 +40,9 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createForm(new Client());
+    this.createForm(
+      new Client('', '', '', '', '', '', '', new Address('', '', '', ''))
+    );
   }
 
   createForm(client: Client) {
@@ -50,6 +54,14 @@ export class SignupComponent implements OnInit {
       nacionalidade: [client.nationality, Validators.required],
       genero: [client.gender, Validators.required],
       senha: [client.password, Validators.required],
+    });
+  }
+  createAddress(address: Address) {
+    this.formAddress = this.fb.group({
+      pais: [address.country, Validators.required],
+      endereco: [address.address, Validators.required],
+      cidade: [address.city, Validators.required],
+      cep: [address.zipcode, Validators.required],
     });
   }
 

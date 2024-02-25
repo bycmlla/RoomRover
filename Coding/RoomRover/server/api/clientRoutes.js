@@ -4,6 +4,7 @@ const connection = require("../services/database/databaseConnection");
 
 router.post("/form/add", (req, res) => {
   console.log("Dados recebidos no servidor:", req.body);
+  
   let details = {
     name: req.body.nome,
     email: req.body.email,
