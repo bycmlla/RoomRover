@@ -12,10 +12,11 @@ import { Address } from 'src/app/models/Address/address';
 export class SignupComponent implements OnInit {
   clientArray: any[] = [];
   isResultLoaded = false;
-  formClient!: FormGroup;
-  formAddress!: FormGroup;
   showAddressForm: boolean = false;
   showPassportForm: boolean = false;
+  formClient!: FormGroup;
+  formAddress!: FormGroup;
+  addressData: any = {};
 
   toggleAddressForm() {
     this.showAddressForm = true;
@@ -27,44 +28,47 @@ export class SignupComponent implements OnInit {
     this.showPassportForm = true;
   }
 
-  saveAddress() {
-    this.showAddressForm = false;
-  }
-
   savePassport() {
     this.showPassportForm = false;
   }
-
+  
   constructor(private fb: FormBuilder, private clientService: ClientService) {
     this.getAllStudent();
   }
-
+  
   ngOnInit(): void {
+    this.createAddress(new Address('', '', '', ''));
     this.createForm(
-      new Client('', '', '', '', '', '', '', new Address('', '', '', ''))
-    );
-  }
-
-  createForm(client: Client) {
-    this.formClient = this.fb.group({
-      nome: [client.name, Validators.required],
-      email: [client.email, Validators.email],
-      phone: [client.phone, Validators.required],
-      nascimento: [client.birthdate, Validators.required],
-      nacionalidade: [client.nationality, Validators.required],
-      genero: [client.gender, Validators.required],
-      senha: [client.password, Validators.required],
-    });
-  }
-  createAddress(address: Address) {
-    this.formAddress = this.fb.group({
-      pais: [address.country, Validators.required],
-      endereco: [address.address, Validators.required],
-      cidade: [address.city, Validators.required],
-      cep: [address.zipcode, Validators.required],
-    });
-  }
-
+      new Client('', '', '', '', '', '', '', this.formAddress.value)
+      );
+    }
+    createAddress(address: Address) {
+      this.formAddress = this.fb.group({
+        pais: address.country,
+        endereco: address.address,
+        cidade: address.city,
+        cep: address.zipcode,
+      });
+      console.log(this.formAddress.value) 
+    }
+    createForm(client: Client) {
+      this.formClient = this.fb.group({
+        nome: [client.name, Validators.required],
+        email: [client.email, Validators.email],
+        phone: [client.phone, Validators.required],
+        nascimento: [client.birthdate, Validators.required],
+        nacionalidade: [client.nationality, Validators.required],
+        genero: [client.gender, Validators.required],
+        senha: [client.password, Validators.required],
+        endereco: this.formAddress,
+      });
+    }
+    
+    saveAddress() {
+      this.addressData = this.formAddress.value;
+      this.createAddress(this.addressData);
+      this.showAddressForm = false;
+    }
   getAllStudent() {
     this.clientService.getAllClients().subscribe(
       (resultData: any) => {
@@ -82,9 +86,12 @@ export class SignupComponent implements OnInit {
     console.log('Dados enviados para o servidor:', this.formClient.value);
 
     if (this.formClient.valid) {
-      const bodyData = this.formClient.value;
+      const clientData = {
+        ...this.formClient.value,
+        address: this.formAddress.value,
+      };
 
-      this.clientService.addClient(bodyData).subscribe({
+      this.clientService.addClient(clientData).subscribe({
         next: (resultData: any) => {
           console.log(resultData);
           alert('Sucesso ao registrar');

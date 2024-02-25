@@ -68,7 +68,6 @@
       </div>
     </div>
 
-
     <div class="form-row">
       <div class="form-group">
         <span *ngIf="!showAddressForm && !showPassportForm">
@@ -83,7 +82,6 @@
           </button>
         </span>
 
-
         <span *ngIf="!showAddressForm && !showPassportForm">
           Dados do Passaporte
           <button
@@ -96,7 +94,6 @@
         </span>
       </div>
 
-
       <div class="form-group" *ngIf="!showAddressForm && !showPassportForm">
         <label for="senha">Senha</label>
         <input
@@ -108,31 +105,53 @@
       </div>
     </div>
 
-    <div class="form-row" *ngIf="showAddressForm">
+    <form
+      [formGroup]="formAddress"
+      formclass="form-row"
+      *ngIf="showAddressForm"
+    >
       <div class="form-group">
-        <label for="senha">País</label>
+        <label for="pais">País</label>
         <input
           type="text"
           class="form-control"
           placeholder="País"
-          formControlName="senha"
+          formControlName="pais"
         />
       </div>
-
-
-      <button class="btn btn-success" (click)="saveAddress()">OK</button>
-    </div>
-
-    <div class="form-row" *ngIf="showPassportForm">
       <div class="form-group">
-        <label for="passportName">Nome no passaporte</label>
+        <label for="endereco">Endereço</label>
         <input
           type="text"
           class="form-control"
-          placeholder="Nome no passaporte"
-          formControlName="passportName"
+          placeholder="Endereço"
+          formControlName="endereco"
         />
       </div>
+      <div class="form-group">
+        <label for="cidade">Cidade</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Cidade"
+          formControlName="cidade"
+        />
+      </div>
+      <div class="form-group">
+        <label for="cep">CEP</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="CEP"
+          formControlName="cep"
+          [value]="formClient.get('endereco.cep')?.value"
+        />
+      </div>
+
+      <button class="btn btn-success" (click)="saveAddress()">OK</button>
+    </form>
+
+    <div class="form-row" *ngIf="showPassportForm">
       <button class="btn btn-success" (click)="savePassport()">OK</button>
     </div>
 
