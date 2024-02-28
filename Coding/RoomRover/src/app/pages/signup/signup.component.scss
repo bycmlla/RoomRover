@@ -1,60 +1,117 @@
 @font-face {
-    font-family: inter;
-    src: url(../../../assets/fonts/Inter-Medium.ttf);
+  font-family: inter;
+  src: url(../../../assets/fonts/Inter-Medium.ttf);
+}
+.form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "inter";
+  min-height: 100vh;
+  padding-top: 70px;
+  margin-top: 5vh;
+  
+  .form-row {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-left: 20px;
+    }
+    .form-group label {
+      margin: 0px 0px 5px 15px;
+    }
+    .form-control {
+      border: solid 2px #dd5f18;
+      border-radius: 5px;
+      margin-left: 15px;
+    }
+    .label-form{
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+    }
   }
-  .form {
+  .button-submit-register {
+    background-color: #ff8845;
     display: flex;
     justify-content: center;
-    align-items: center;
-    font-family: inter;
-    min-height: 100vh;
-    .form-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 25px;
-  
-      .form-group {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        margin-left: 20px;
+    color: white;
+    padding: 5px 80px 5px 80px;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    margin: 0 auto; 
+  }
+  .custom-btn {
+    background-color: #FF8845;
+    color: white; 
+    border-radius: 3px;
+    font-size: 13px;
+}
+}
+
+.form-row-address {
+  display: flex;
+  margin-bottom: 25px;
+  margin-left: 35px;
+
+  .form-row-address h6 {
+    margin-right: 20px;
+  }
+
+  .form-address-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    margin-left: 30px;
+
+    .form-address {
+      border: solid 2px rgba(128, 128, 128, 0.289);
+      border-radius: 5px;
+      padding: 5px 10px 5px 14px;
+
+      .form-address::placeholder {
+        color: rgba(0, 0, 0, 0.58);
+        font-size: 14px;
       }
-      label {
-        margin: 0px 0px 5px 15px;
+      .form-row-address .form-address-group label {
+        margin-right: 20px;
+        font-size: 15px;
+        color: rgba(0, 0, 0, 0.794);
       }
-      .form-control {
-        border: solid 2px #dd5f18;
-        border-radius: 5px;
-        //cima, direita, abaixo, esquerda
-        //sentido horario
-        padding: 10px 5px 10px 10px;
-        margin-left: 15px;
-      }
-    }
-    .buttonSubmitRegister {
-      background-color: #ff8845;
-      color: white;
-      padding: 8px 80px 8px 80px;
-      border: none;
-      border-radius: 7px;
-      font-size: 15px;
-      margin-top: auto;
-      margin-bottom: auto;
     }
   }
-  @media screen and (max-width: 600px) {
-    .form-row {
-      flex-direction: column;
-    }
-  
-    .form-group {
-      margin-bottom: 10px;
-    }
+  .form-two-end {
+    display: flex;
+    flex-direction: row;
   }
-  
-  @media screen and (max-width: 400px) {
-    .form-control {
-      margin: 0;
-    }
+    .custom-btn {
+      background-color: #FF8845;
+      color: white; 
+      border-radius: 3px;
+      font-size: 13px;
   }
-  
+}
+
+@media screen and (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .form-control {
+    margin: 0;
+  }
+}

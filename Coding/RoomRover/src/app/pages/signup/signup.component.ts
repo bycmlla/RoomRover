@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from 'src/app/models/Client/client';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from '../../services/api/apiservice.service';
+import { Client } from 'src/app/models/Client/client';
 import { Address } from 'src/app/models/Address/address';
+import { Passport } from './../../models/Passport/passport';
 
 @Component({
   selector: 'app-signup',
@@ -16,8 +17,75 @@ export class SignupComponent implements OnInit {
   showPassportForm: boolean = false;
   formClient!: FormGroup;
   formAddress!: FormGroup;
-  addressData: any = {};
+  formPassport!: FormGroup;
+  savedAddressData: any = {};
+  savedPassportData: any = {};
 
+  constructor(private fb: FormBuilder, private clientService: ClientService) {
+    this.getAllStudent();
+  }
+
+  ngOnInit(): void {
+    this.createAddress(new Address('', '', '', ''));
+    this.createPassport(new Passport('', '', '', ''));
+    this.createForm(
+      new Client(
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        this.formAddress.value,
+        this.formPassport.value
+      )
+    );
+  }
+
+  createForm(client: Client) {
+    this.formClient = this.fb.group({
+      nome: [client.name, Validators.required],
+      email: [client.email, Validators.email],
+      phone: [client.phone, Validators.required],
+      nascimento: [client.birthdate, Validators.required],
+      nacionalidade: [client.nationality, Validators.required],
+      genero: [client.gender, Validators.required],
+      senha: [client.password, Validators.required],
+      endereco: this.formAddress,
+      passaporte: this.formPassport,
+    });
+  }
+
+  createAddress(address: Address) {
+    this.formAddress = this.fb.group({
+      pais: address.country,
+      endereco: address.address,
+      cidade: address.city,
+      cep: address.zipcode,
+    });
+    console.log(this.formAddress.value);
+  }
+  createPassport(passport: Passport) {
+    this.formPassport = this.fb.group({
+      nomePassaporte: passport.namePassport,
+      numero: passport.number,
+      paisEmissor: passport.issuingCountry,
+      dataExpiracao: passport.expirationDate,
+    });
+  }
+
+  saveAddress() {
+    this.savedAddressData = this.formAddress.value;
+    this.showAddressForm = false;
+    console.log(this.savedAddressData);
+  }
+
+  savePassport() {
+    this.savedPassportData = this.formPassport.value;
+    this.showPassportForm = false;
+    console.log(this.savedPassportData);
+  }
   toggleAddressForm() {
     this.showAddressForm = true;
     this.showPassportForm = false;
@@ -27,48 +95,6 @@ export class SignupComponent implements OnInit {
     this.showAddressForm = false;
     this.showPassportForm = true;
   }
-
-  savePassport() {
-    this.showPassportForm = false;
-  }
-  
-  constructor(private fb: FormBuilder, private clientService: ClientService) {
-    this.getAllStudent();
-  }
-  
-  ngOnInit(): void {
-    this.createAddress(new Address('', '', '', ''));
-    this.createForm(
-      new Client('', '', '', '', '', '', '', this.formAddress.value)
-      );
-    }
-    createAddress(address: Address) {
-      this.formAddress = this.fb.group({
-        pais: address.country,
-        endereco: address.address,
-        cidade: address.city,
-        cep: address.zipcode,
-      });
-      console.log(this.formAddress.value) 
-    }
-    createForm(client: Client) {
-      this.formClient = this.fb.group({
-        nome: [client.name, Validators.required],
-        email: [client.email, Validators.email],
-        phone: [client.phone, Validators.required],
-        nascimento: [client.birthdate, Validators.required],
-        nacionalidade: [client.nationality, Validators.required],
-        genero: [client.gender, Validators.required],
-        senha: [client.password, Validators.required],
-        endereco: this.formAddress,
-      });
-    }
-    
-    saveAddress() {
-      this.addressData = this.formAddress.value;
-      this.createAddress(this.addressData);
-      this.showAddressForm = false;
-    }
   getAllStudent() {
     this.clientService.getAllClients().subscribe(
       (resultData: any) => {
@@ -84,14 +110,9 @@ export class SignupComponent implements OnInit {
 
   register() {
     console.log('Dados enviados para o servidor:', this.formClient.value);
-
     if (this.formClient.valid) {
-      const clientData = {
-        ...this.formClient.value,
-        address: this.formAddress.value,
-      };
-
-      this.clientService.addClient(clientData).subscribe({
+      const bodyData = this.formClient.value;
+      this.clientService.addClient(bodyData).subscribe({
         next: (resultData: any) => {
           console.log(resultData);
           alert('Sucesso ao registrar');

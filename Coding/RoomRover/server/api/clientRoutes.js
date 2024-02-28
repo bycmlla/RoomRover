@@ -12,7 +12,7 @@ router.post("/form/add", (req, res) => {
     zipcode: req.body.cep,
   };
 
-  let sqlAddress = "INSERT INTO roomrover.adress SET ?";
+  let sqlAddress = "INSERT INTO roomrover.address SET ?";
 
   connection.query(
     sqlAddress,

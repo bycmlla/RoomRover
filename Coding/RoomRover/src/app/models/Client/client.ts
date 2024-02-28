@@ -1,4 +1,5 @@
 import { Address } from '../Address/address';
+import { Passport } from '../Passport/passport';
 
 export class Client {
   name: string = '';
@@ -9,6 +10,7 @@ export class Client {
   gender: string = '';
   password: string = '';
   address: Address;
+  passport: Passport;
   
   constructor(
     name: string,
@@ -18,7 +20,8 @@ export class Client {
     nationality: string,
     gender: string,
     password: string,
-    address: Address
+    address: Address,
+    passport: Passport,
   ) {
     this.name = name;
     this.email = email;
@@ -28,5 +31,6 @@ export class Client {
     this.gender = gender;
     this.password = password;
     this.address = address;
+    this.passport = passport;
   }
 }

@@ -1,6 +1,7 @@
 <app-navbar [redirectOnLogoClick]="'/'"></app-navbar>
 
 <form class="form" [formGroup]="formClient" (ngSubmit)="onSubmit()">
+  <h5><b>Realize o seu cadastro</b></h5>
   <div class="div-form">
     <div class="form-row">
       <div class="form-group">
@@ -67,34 +68,33 @@
         />
       </div>
     </div>
-
+    
     <div class="form-row">
       <div class="form-group">
-        <span *ngIf="!showAddressForm && !showPassportForm">
-          Endereço
-          <button
-            *ngIf="!showAddressForm && !showPassportForm"
+        <div class="label-form">
+          <span *ngIf="!showAddressForm && !showPassportForm">
+            Endereço
+            <button
             type="button"
-            class="btn btn-primary"
+            class="btn custom-btn"
             (click)="toggleAddressForm()"
-          >
+            >
             Inserir
           </button>
         </span>
-
         <span *ngIf="!showAddressForm && !showPassportForm">
           Dados do Passaporte
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="togglePassportForm()"
-          >
-            Inserir
-          </button>
-        </span>
+            <button
+              type="button"
+              class="btn custom-btn"
+              (click)="togglePassportForm()"
+              >
+              Inserir
+            </button>
+          </span>
+        </div>
       </div>
-
-      <div class="form-group" *ngIf="!showAddressForm && !showPassportForm">
+      <div class="form-group">
         <label for="senha">Senha</label>
         <input
           type="password"
@@ -105,59 +105,100 @@
       </div>
     </div>
 
-    <form
-      [formGroup]="formAddress"
-      formclass="form-row"
-      *ngIf="showAddressForm"
-    >
-      <div class="form-group">
-        <label for="pais">País</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="País"
-          formControlName="pais"
-        />
-      </div>
-      <div class="form-group">
-        <label for="endereco">Endereço</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Endereço"
-          formControlName="endereco"
-        />
-      </div>
-      <div class="form-group">
-        <label for="cidade">Cidade</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Cidade"
-          formControlName="cidade"
-        />
-      </div>
-      <div class="form-group">
-        <label for="cep">CEP</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="CEP"
-          formControlName="cep"
-          [value]="formClient.get('endereco.cep')?.value"
-        />
-      </div>
+    <div *ngIf="showAddressForm" class="form-row-address">
+      <h6><b>Endereço</b></h6>
+      <div [formGroup]="formAddress">
+        <div class="form-address-group">
+          <label for="pais">País</label>
+          <input
+            type="text"
+            class="form-address"
+            placeholder="Selecione o seu país"
+            formControlName="pais"
+          />
+        </div>
+        <div class="form-address-group">
+          <label for="endereco">Endereço</label>
+          <input
+            type="text"
+            class="form-address"
+            placeholder="O nome da sua rua e número da sua casa/apto"
+            formControlName="endereco"
+          />
+        </div>
 
-      <button class="btn btn-success" (click)="saveAddress()">OK</button>
-    </form>
+        <div class="form-two-end">
+          <div class="form-address-group">
+            <label for="cidade">Cidade</label>
+            <input
+              type="text"
+              class="form-address"
+              placeholder="Cidade"
+              formControlName="cidade"
+            />
+          </div>
+          <div class="form-address-group">
+            <label for="cep">CEP</label>
+            <input
+              type="text"
+              class="form-address"
+              placeholder="CEP"
+              formControlName="cep"
+            />
+          </div>
+        </div>
+        <button class="btn custom-btn" (click)="saveAddress()">OK</button>
+      </div>
+    </div>
 
-    <div class="form-row" *ngIf="showPassportForm">
-      <button class="btn btn-success" (click)="savePassport()">OK</button>
+    <div *ngIf="showPassportForm" class="form-row-address">
+      <h6><b>Dados do Passaporte</b></h6>
+      <div [formGroup]="formPassport">
+        <div class="form-address-group">
+          <label for="nomePassaporte">Nome no Passaporte</label>
+          <input
+            type="text"
+            class="form-address"
+            placeholder="Nome no Passaporte"
+            formControlName="nomePassaporte"
+          />
+        </div>
+        <div class="form-address-group">
+          <label for="numero">Número</label>
+          <input
+            type="text"
+            class="form-address"
+            placeholder="Número"
+            formControlName="numero"
+          />
+        </div>
+        <div class="form-two-end">
+          <div class="form-address-group">
+            <label for="paisEmissor">Selecione o país emissor</label>
+            <input
+              type="text"
+              class="form-address"
+              placeholder="País Emissor"
+              formControlName="paisEmissor"
+            />
+          </div>
+          <div class="form-address-group">
+            <label for="dataExpiracao">Data de Expiração</label>
+            <input
+              type="text"
+              class="form-address"
+              placeholder="Data de Expiração"
+              formControlName="dataExpiracao"
+            />
+          </div>
+        </div>
+        <button class="btn custom-btn" (click)="savePassport()">OK</button>
+      </div>
     </div>
 
     <button
       *ngIf="!showAddressForm && !showPassportForm"
-      class="buttonSubmitRegister"
+      class="button-submit-register"
       type="submit"
     >
       Cadastrar
