@@ -80,6 +80,7 @@ export class SignupComponent implements OnInit {
     this.showAddressForm = false;
     console.log(this.savedAddressData);
   }
+  
 
   savePassport() {
     this.savedPassportData = this.formPassport.value;
@@ -95,6 +96,9 @@ export class SignupComponent implements OnInit {
     this.showAddressForm = false;
     this.showPassportForm = true;
   }
+
+  
+
   getAllStudent() {
     this.clientService.getAllClients().subscribe(
       (resultData: any) => {
@@ -111,7 +115,12 @@ export class SignupComponent implements OnInit {
   register() {
     console.log('Dados enviados para o servidor:', this.formClient.value);
     if (this.formClient.valid) {
-      const bodyData = this.formClient.value;
+      const bodyData = {
+        ...this.formClient.value,
+        endereco: this.formAddress.value,
+        passaporte: this.formPassport.value,
+      };
+  
       this.clientService.addClient(bodyData).subscribe({
         next: (resultData: any) => {
           console.log(resultData);
