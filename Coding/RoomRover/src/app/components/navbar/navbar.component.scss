@@ -15,7 +15,7 @@
 
   .logo-name {
     font-family: inter;
-    font-size: 20px;
+    font-size: 18px;
     margin-right: auto;
     margin-left: 10px;
     cursor: pointer;
@@ -34,6 +34,11 @@
   }
 
   .register {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+  .login{
     color: white;
     text-decoration: none;
     margin-left: 20px;

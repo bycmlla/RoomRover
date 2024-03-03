@@ -9,6 +9,8 @@ import { ClientService } from './services/api/apiservice.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { LoginComponent } from './pages/login/login.component';
+import { NavbarMainComponent } from './components/navbar-main/navbar-main.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { SignupComponent } from './pages/signup/signup.component';
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    SignupComponent
+    SignupComponent,
+    LoginComponent,
+    NavbarMainComponent
   ],
   imports: [
     BrowserModule,

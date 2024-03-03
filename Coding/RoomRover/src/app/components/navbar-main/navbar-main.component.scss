@@ -1,0 +1,47 @@
+@font-face {
+    font-family: inter;
+    src: url(../../../assets/fonts/Inter-Medium.ttf);
+  }
+  .toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    display: flex;
+    background: linear-gradient(rgba(221,95,24,1), rgb(252, 157, 102));
+    color: white;
+    padding: 10px;
+  
+    .logo-name {
+      font-family: inter;
+      font-size: 18px;
+      margin-right: auto;
+      margin-left: 10px;
+      cursor: pointer;
+      line-height: 50px;
+    }
+  }
+  
+  .actions {
+    display: flex;
+    align-items: center;
+  
+    .bi {
+      font-size: 30px;
+      margin-left: 20px;
+      margin-right: 10px;
+    }
+  
+    .register {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+    .login{
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+  }
+  

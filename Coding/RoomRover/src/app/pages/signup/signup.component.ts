@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ClientService } from '../../services/api/apiservice.service';
 import { Client } from 'src/app/models/Client/client';
 import { Address } from 'src/app/models/Address/address';
@@ -21,7 +22,7 @@ export class SignupComponent implements OnInit {
   savedAddressData: any = {};
   savedPassportData: any = {};
 
-  constructor(private fb: FormBuilder, private clientService: ClientService) {
+  constructor(private fb: FormBuilder, private clientService: ClientService, private router: Router) {
     this.getAllStudent();
   }
 
@@ -126,6 +127,8 @@ export class SignupComponent implements OnInit {
           console.log(resultData);
           alert('Sucesso ao registrar');
           this.getAllStudent();
+
+          this.router.navigate(['/login'])
         },
         error: (error) => {
           console.error('Erro ao registrar:', error);

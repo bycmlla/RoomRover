@@ -2,8 +2,8 @@
   font-family: inter;
   src: url(../../../assets/fonts/Inter-Medium.ttf);
 }
+
 .form {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,32 +12,42 @@
   padding-top: 70px;
   margin-top: 5vh;
   
+  h5 {
+    margin: 10px 0px 30px 0px;
+  }
+
   .form-row {
-    position: relative;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
-
+    
     .form-group {
       flex: 1;
       display: flex;
       flex-direction: column;
       margin-left: 20px;
+      margin-bottom: 15px;
+
+      label {
+        margin: 0 0 0px 15px;
+        font-size: 15px;
+      }
+
+      .form-control {
+        border: 2px solid #dd5f18;
+        border-radius: 5px;
+        margin-left: 15px;
+        font-size: 15px;
+
+      }
     }
-    .form-group label {
-      margin: 0px 0px 5px 15px;
-    }
-    .form-control {
-      border: solid 2px #dd5f18;
-      border-radius: 5px;
-      margin-left: 15px;
-    }
-    .label-form{
+
+    .label-form {
       display: flex;
       flex-direction: column;
       margin-left: 10px;
     }
   }
+
   .button-submit-register {
     background-color: #ff8845;
     display: flex;
@@ -47,14 +57,16 @@
     border: none;
     border-radius: 4px;
     font-size: 15px;
-    margin: 0 auto; 
+    margin: 0 auto;
+    margin-top: 30px;
   }
+
   .custom-btn {
-    background-color: #FF8845;
-    color: white; 
+    background-color: #ff8845;
+    color: white;
     border-radius: 3px;
     font-size: 13px;
-}
+  }
 }
 
 .form-row-address {
@@ -62,7 +74,7 @@
   margin-bottom: 25px;
   margin-left: 35px;
 
-  .form-row-address h6 {
+  h6 {
     margin-right: 20px;
   }
 
@@ -73,30 +85,26 @@
     margin-left: 30px;
 
     .form-address {
-      border: solid 2px rgba(128, 128, 128, 0.289);
+      border: 2px solid rgba(128, 128, 128, 0.289);
       border-radius: 5px;
       padding: 5px 10px 5px 14px;
 
-      .form-address::placeholder {
+      &::placeholder {
         color: rgba(0, 0, 0, 0.58);
         font-size: 14px;
       }
-      .form-row-address .form-address-group label {
-        margin-right: 20px;
-        font-size: 15px;
-        color: rgba(0, 0, 0, 0.794);
-      }
+    }
+
+    label {
+      margin-right: 20px;
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.794);
     }
   }
+
   .form-two-end {
     display: flex;
     flex-direction: row;
-  }
-    .custom-btn {
-      background-color: #FF8845;
-      color: white; 
-      border-radius: 3px;
-      font-size: 13px;
   }
 }
 

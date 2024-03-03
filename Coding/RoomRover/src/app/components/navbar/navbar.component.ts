@@ -17,14 +17,5 @@ export class NavbarComponent {
       this.router.navigate([this.redirectOnLogoClick]);
     }
   }
-  isNotFormRoute(): boolean {
-    //se retorna true, a rota atual não é signup, já que está com o negativo
-    //mas se for, ele retorna false
-    return !this.router.isActive('/signup', {
-      paths: 'exact',
-      queryParams: 'exact',
-      fragment: 'ignored',
-      matrixParams: 'ignored',
-    });
-  }
+  
 }
