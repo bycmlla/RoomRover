@@ -12,6 +12,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NavbarMainComponent } from './components/navbar-main/navbar-main.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ReadDataComponent } from './pages/read-data/read-data.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { FooterComponent } from './components/footer/footer.component';
     SignupComponent,
     LoginComponent,
     NavbarMainComponent,
-    FooterComponent
+    FooterComponent,
+    ReadDataComponent
   ],
   imports: [
     BrowserModule,
