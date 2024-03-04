@@ -1,11 +1,51 @@
-<div class="toolbar">
-    <p class="logo-name" (click)="onLogoClick()">
-      <a>{{ redirectOnLogoClick ? 'RoomRover.com' : 'RoomRover.com' }}</a>
-    </p>
-    <div class="actions">
-      <a routerLink="signup" class="register">Cadastre-se</a>
-      <a routerLink="login" class="login">Login</a>
-      <i class="bi bi-question-circle"></i>
+<div class="navbar-container">
+  <div class="toolbar">
+    <div class="logo-actions">
+      <div class="logo-name" (click)="onLogoClick()">
+        <a>{{ redirectOnLogoClick ? "RoomRover.com" : "RoomRover.com" }}</a>
+      </div>
+      <div class="actions">
+        <button type="button" routerLink="signup" class="register">
+          Cadastre-se
+        </button>
+        <button type="button" routerLink="login" class="login">Login</button>
+      </div>
+    </div>
+    <div class="navigation">
+      <button type="button" class="hospedagem-button">Hospedagens</button>
+    </div>
+    <div class="text-banner">
+      <h2>Encontre sua próxima estadia</h2>
+      <span
+        >Encontre as melhores ofertas de hotéis para sua melhor estadia...</span
+      >
+    </div>
+    <div class="teste">
+      <select class="form-select select-filter">
+        <option selected>Cidade</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+      <select class="form-select select-filter">
+        <option selected>Data de check-in</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+      <select class="form-select select-filter">
+        <option selected>Data de check-out</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+      <select class="form-select select-filter">
+        <option selected>N° pessoas</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+      <img src="../../../assets/icons/search-icon.svg" style="max-width: 100%; height: 40px;">
     </div>
   </div>
-
+</div>

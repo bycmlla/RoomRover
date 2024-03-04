@@ -1,47 +1,106 @@
 @font-face {
-    font-family: inter;
-    src: url(../../../assets/fonts/Inter-Medium.ttf);
-  }
+  font-family: inter;
+  src: url(../../../assets/fonts/Inter-Medium.ttf);
+}
+
+.navbar-container {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+
   .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 70px;
     display: flex;
-    background: linear-gradient(rgba(221,95,24,1), rgb(252, 157, 102));
+    flex-direction: column;
+    background: linear-gradient(#dd5f18, rgb(254, 172, 125));
     color: white;
-    padding: 10px;
-  
-    .logo-name {
-      font-family: inter;
-      font-size: 18px;
-      margin-right: auto;
-      margin-left: 10px;
-      cursor: pointer;
-      line-height: 50px;
+    text-align: center;
+    position: relative;
+
+    .logo-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .logo-name {
+        font-family: inter;
+        font-size: 18px;
+        margin: 17px 40px 0 40px;
+        cursor: pointer;
+        line-height: 50px;
+        font-weight: 600;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+
+        .register,
+        .login {
+          color: rgb(28, 28, 28);
+          background-color: white;
+          border: none;
+          border-radius: 2px;
+          font-size: 13px;
+          padding: 2px 14px 4px;
+          margin-top: 10px;
+        }
+        .login {
+          margin-right: 35px;
+        }
+      }
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hospedagem-button {
+      color: rgb(255, 255, 255);
+      background-color: rgba(101, 101, 101, 0.18);
+      border: solid 1px white;
+      border-radius: 15px;
+      font-size: 13px;
+      padding: 6px 30px;
     }
   }
-  
-  .actions {
+  .text-banner {
+    text-align: start;
+    margin: 40px 0 20px 25px;
+  }
+  .teste {
+    position: relative;
+    top: 30px;
+    margin-left: 15px;
     display: flex;
-    align-items: center;
-  
-    .bi {
-      font-size: 30px;
-      margin-left: 20px;
-      margin-right: 10px;
-    }
-  
-    .register {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-    }
-    .login{
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
+    gap: 10px;
+    margin-bottom: 10px;
+    max-width: 98%;
+
+    .select-filter {
+      border: solid 1px rgba(0, 0, 0, 0.401);
+      border-radius: 4px;
+      font-size: 15px;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: 0 4px 2px rgba(0, 0, 0, 0.4);
     }
   }
-  
+}
+
+@media screen and (min-width: 768px) {
+  .toolbar {
+    .logo-name {
+      margin: 10px auto;
+    }
+
+    .actions {
+      .login {
+        margin-right: 10%;
+      }
+    }
+  }
+}

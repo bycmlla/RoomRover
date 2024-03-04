@@ -1,5 +1,11 @@
-.imagem-maceio {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card .card-img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
