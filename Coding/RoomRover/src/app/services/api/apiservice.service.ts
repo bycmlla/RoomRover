@@ -20,4 +20,12 @@ export class ClientService {
   getAllClients(): Observable<any[]> {
     return this.http.get<any[]>('http://localhost:8080/form/read');
   }
+
+  authenticateClient(email: string, password: string): Observable<any> {
+    const credentials = { email, password };
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post<any>('http://localhost:8080/form/login', credentials, {
+      headers,
+    });
+  }
 }

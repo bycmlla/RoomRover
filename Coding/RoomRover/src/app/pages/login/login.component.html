@@ -1,6 +1,6 @@
 <app-navbar [redirectOnLogoClick]="'/'"></app-navbar>
 
-<form class="form-login">
+<form class="form-login" (ngSubmit)="login()">
   <h5>Faça login</h5>
   <div class="form-row-login">
     <div class="form-group-login">
@@ -9,6 +9,8 @@
         type="email"
         placeholder="Digite seu e-mail"
         class="form-control-login"
+        [(ngModel)]="email"
+        name="email"
       />
     </div>
   </div>
@@ -16,9 +18,11 @@
     <div class="form-group-login">
       <label for="senha">Senha</label>
       <input
-        type="password"
-        placeholder="Digite sua senha"
-        class="form-control-login"
+      type="password"
+      placeholder="Digite sua senha"
+      class="form-control-login"
+      [(ngModel)]="password"
+      name="password"
       />
     </div>
   </div>
