@@ -13,6 +13,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { NavbarMainComponent } from './components/navbar-main/navbar-main.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ReadDataComponent } from './pages/read-data/read-data.component';
+import { AccommodationComponent } from './pages/accommodation/accommodation.component';
+import { AccommodationDetailsComponent } from './pages/accommodation-details/accommodation-details.component';
+import { ReservationsComponent } from './pages/reservations/reservations.component';
+import { ReservationsDetailsComponent } from './pages/reservations-details/reservations-details.component';
 
 
 @NgModule({
@@ -24,7 +28,11 @@ import { ReadDataComponent } from './pages/read-data/read-data.component';
     LoginComponent,
     NavbarMainComponent,
     FooterComponent,
-    ReadDataComponent
+    ReadDataComponent,
+    AccommodationComponent,
+    AccommodationDetailsComponent,
+    ReservationsComponent,
+    ReservationsDetailsComponent
   ],
   imports: [
     BrowserModule,

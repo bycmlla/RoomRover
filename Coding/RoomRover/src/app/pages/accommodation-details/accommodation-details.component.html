@@ -1,0 +1,80 @@
+<app-navbar-main [redirectOnLogoClick]="'/'"></app-navbar-main>
+
+<div class="ms-5 mt-5 mb-1 d-flex flex-row">
+  <div class="position-relative" style="width: 400px">
+    <h5 class="mb-3">Hotel name</h5>
+    <img
+      src="../../../assets/images/hotel.png"
+      alt=""
+      class="img-fluid"
+      style="cursor: pointer"
+    />
+  </div>
+  <div class="d-flex flex-column ms-4 mt-5" style="max-width: 600px">
+    <h5 class="card-title text-nowrap">Hotel cidade</h5>
+    <p class="card-text text-nowrap">
+      <i class="bi bi-geo-alt-fill"></i> Hotel endereço
+    </p>
+    <p class="card-text text-nowrap">dias, quantidade adultos</p>
+    <h6 class="text-nowrap">R$ Preço</h6>
+    <p class="card-text" style="text-align: justify">descrição</p>
+  </div>
+</div>
+
+<div class="mt-4 mb-5">
+  <div class="d-flex justify-content-between my-table-container">
+    <table class="table table-bordered my-table" style="border-color: #f17735">
+      <thead>
+        <tr>
+          <th scope="col" class="pb-5">Categoria de quarto</th>
+          <th scope="col" class="pb-5">Quantas pessoas?</th>
+          <th scope="col" class="pb-5">Valor</th>
+          <th scope="col" class="pb-5">N° de quartos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="pb-5 pt-3">body.categoria</td>
+          <td class="pb-5 pt-3">body.pessoas</td>
+          <td class="pb-5 pt-3">body.valor</td>
+          <td class="pb-5 pt-3">
+            <select
+              name="0"
+              id="0"
+              class="form-select form-select-sm p-1 shadow-sm"
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <div class="ms-3">
+        <label class="label">Data de entrada</label>
+        <input
+          type="date"
+          id="dataEntrada"
+          name="dataEntrada"
+          class="form-control shadow-sm rounded-1"
+        />
+      </div>
+      <div class="ms-3 mb-3">
+        <label class="label">Data de saída</label>
+        <input
+          type="date"
+          id="dataEntrada"
+          name="dataEntrada"
+          class="form-control shadow-sm rounded-1"
+        />
+      </div>
+      <div class="ms-4">
+        <button class="btn btn-warning">Realizar reserva</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

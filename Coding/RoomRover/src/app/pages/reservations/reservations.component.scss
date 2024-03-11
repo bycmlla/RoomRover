@@ -1,0 +1,40 @@
+.title {
+  margin-top: 100px;
+  margin-right: 50px;
+  border-bottom: solid 2px rgba(0, 0, 0, 0.075);
+}
+
+.title p {
+  color: rgba(0, 0, 0, 0.493);
+}
+
+.bi-dot {
+  font-size: 40px;
+  color: rgb(81, 255, 0);
+}
+
+h6 {
+  margin-top: 10px;
+  color: rgb(81, 255, 0);
+}
+.card-header{
+    background-color: #FF8845;
+    color: white;
+    border-radius: 1px;
+    text-align: center;
+}
+.btn-outline{
+    background-color: red;
+    color: white;
+    font-size: 13px;
+    padding: 3px 15px 3px 15px;
+    border-radius: 2px;
+    margin-left: 10px;
+}
+.btn-warning{
+    background-color: #FF8845;
+    color: white;
+    font-size: 13px;
+    padding: 3px 15px 3px 15px;
+    border-radius: 2px;
+}

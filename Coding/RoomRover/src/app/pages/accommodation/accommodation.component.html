@@ -1,0 +1,31 @@
+<app-navbar-main [redirectOnLogoClick]="'/'"></app-navbar-main>
+
+<div class="card m-4 mt-5 custom-shadow position-relative">
+  <div class="col-6 m-3 d-flex flex-row align-items-center">
+    <div>
+      <img
+        src="../../../assets/images/hotel.png"
+        alt=""
+        class="img-fluid"
+        style="cursor: pointer"
+      />
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-title text-nowrap">Hotel name</h5>
+      <p class="card-text text-nowrap">Hotel cidade</p>
+      <p class="card-text text-nowrap">Diaria, quantidade adultos</p>
+      <h6 class="text-nowrap">Preço</h6>
+      <p class="card-text text-success" style="text-align: justify">
+        descrição
+      </p>
+      <button
+        (click)="navigateToDetails()"
+        class="btn btn-warning position-absolute bottom-0 end-0 m-3"
+        style="background-color: #ff8845; color: white"
+      >
+        Ver disponibilidade
+      </button>
+    </div>
+  </div>
+</div>

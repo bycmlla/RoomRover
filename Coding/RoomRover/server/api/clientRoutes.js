@@ -129,7 +129,7 @@ router.post("/form/login", (req, res) => {
           .send({ status: false, message: "Credenciais inválidas" });
       }
 
-      const token = generateToken(user.id);
+      const token = generateToken(user.idclient);
       console.log("token gerado", token);
 
       res.status(200).json({ status: true, token });
