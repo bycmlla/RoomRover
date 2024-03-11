@@ -1,0 +1,34 @@
+.all {
+  margin-top: 100px;
+  h4 {
+    border-bottom: solid 1px rgba(0, 0, 0, 0.164);
+    margin-right: 150px;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+  }
+  p {
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+}
+
+.title {
+  margin-left: 150px;
+}
+
+.list-group {
+  justify-content: center;
+}
+
+.list-group-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px 10px;
+  margin: 0px 150px 20px 150px;
+}
+
+.list-group-item li {
+  margin-bottom: 20px;
+  list-style-type: none;
+}
