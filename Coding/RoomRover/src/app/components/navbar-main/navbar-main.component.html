@@ -5,14 +5,46 @@
         <a>{{ redirectOnLogoClick ? "RoomRover.com" : "RoomRover.com" }}</a>
       </div>
       <div class="actions">
-        <button type="button" routerLink="signup" class="register">
+        <button
+          *ngIf="!isAuthenticated"
+          type="button"
+          routerLink="signup"
+          class="register"
+        >
           Cadastre-se
         </button>
-        <button type="button" routerLink="login" class="login">Login</button>
+        <button
+          *ngIf="!isAuthenticated"
+          type="button"
+          routerLink="login"
+          class="login"
+        >
+          Login
+        </button>
+        <button
+          *ngIf="isAuthenticated"
+          type="button"
+          routerLink="read-data"
+          class="my-data"
+        >Meus Dados</button>
       </div>
     </div>
     <div class="navigation">
-      <button type="button" routerLink="accommodations" class="hospedagem-button">Hospedagens</button>
+      <button
+        type="button"
+        routerLink="accommodations"
+        class="hospedagem-button"
+      >
+        Hospedagens
+      </button>
+      <button
+        *ngIf="isAuthenticated"
+        type="button"
+        routerLink="reservations"
+        class="reservas-button"
+      >
+        Minhas reservas
+      </button>
     </div>
     <div class="text-banner">
       <h2>Encontre sua próxima estadia</h2>
@@ -45,7 +77,10 @@
         <option value="2">Two</option>
         <option value="3">Three</option>
       </select>
-      <img src="../../../assets/icons/search-icon.svg" style="max-width: 100%; height: 40px;">
+      <img
+        src="../../../assets/icons/search-icon.svg"
+        style="max-width: 100%; height: 40px"
+      />
     </div>
   </div>
 </div>

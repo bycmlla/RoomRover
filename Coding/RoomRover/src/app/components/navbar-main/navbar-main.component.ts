@@ -1,5 +1,7 @@
 import { Router } from '@angular/router';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
+
 @Component({
   selector: 'app-navbar-main',
   templateUrl: './navbar-main.component.html',
@@ -7,38 +9,19 @@ import { Component, Input } from '@angular/core';
 })
 export class NavbarMainComponent {
   @Input() redirectOnLogoClick: string = '';
+  isAuthenticated: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
+  ngOnInit(): void {
+    this.authService.getAuthenticationStatus().subscribe((status) => {
+      this.isAuthenticated = status;
+    })
+  }
   onLogoClick() {
     if (this.redirectOnLogoClick) {
       this.router.navigate([this.redirectOnLogoClick]);
     }
   }
-  // isNotFormRoute(): boolean {
-  //   //se retorna true, a rota atual não é signup, já que está com o negativo
-  //   //mas se for, ele retorna false
-  //   return (
-  //     !this.router.isActive('/signup', {
-  //       paths: 'exact',
-  //       queryParams: 'exact',
-  //       fragment: 'ignored',
-  //       matrixParams: 'ignored',
-  //     }) &&
-  //     !this.router.isActive('/login', {
-  //       paths: 'exact',
-  //       queryParams: 'exact',
-  //       fragment: 'ignored',
-  //       matrixParams: 'ignored',
-  //     })
-  //   );
-  // }
-  // isHomePage(): boolean {
-  //   return this.router.isActive('/', {
-  //     paths: 'exact',
-  //     queryParams: 'exact',
-  //     fragment: 'ignored',
-  //     matrixParams: 'ignored',
-  //   });
-  // }
+
 }

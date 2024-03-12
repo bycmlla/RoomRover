@@ -37,7 +37,8 @@
         gap: 10px;
 
         .register,
-        .login {
+        .login,
+        .my-data {
           color: rgb(28, 28, 28);
           background-color: white;
           border: none;
@@ -49,6 +50,9 @@
         .login {
           margin-right: 35px;
         }
+        .my-data{
+          margin-right: 35px;
+        }
       }
     }
 
@@ -56,9 +60,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      gap: 20px;
     }
 
-    .hospedagem-button {
+    .hospedagem-button, .reservas-button {
       color: rgb(255, 255, 255);
       background-color: rgba(101, 101, 101, 0.18);
       border: solid 1px white;
@@ -66,6 +71,7 @@
       font-size: 13px;
       padding: 6px 30px;
     }
+
   }
   .text-banner {
     text-align: start;
