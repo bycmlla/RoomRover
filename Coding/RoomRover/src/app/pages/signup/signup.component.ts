@@ -5,7 +5,7 @@ import { ClientService } from '../../services/api/apiservice.service';
 import { Client } from 'src/app/models/Client/client';
 import { Address } from 'src/app/models/Address/address';
 import { Passport } from './../../models/Passport/passport';
-
+import { AuthService } from 'src/app/services/auth/auth.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -22,8 +22,7 @@ export class SignupComponent implements OnInit {
   savedAddressData: any = {};
   savedPassportData: any = {};
 
-  constructor(private fb: FormBuilder, private clientService: ClientService, private router: Router) {
-    this.getAllStudent();
+  constructor(private fb: FormBuilder, private clientService: ClientService, private router: Router, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -41,6 +40,18 @@ export class SignupComponent implements OnInit {
         this.formAddress.value,
         this.formPassport.value
       )
+    );
+    this.authService.getUserId().subscribe(
+      (userId: number) => {
+        if (userId) {
+          this.getAllStudent(userId);
+        } else {
+          console.error('userId não está disponível');
+        }
+      },
+      (error) => {
+        console.error('Erro ao obter userId:', error);
+      }
     );
   }
 
@@ -98,20 +109,19 @@ export class SignupComponent implements OnInit {
     this.showPassportForm = true;
   }
 
-  
-
-  getAllStudent() {
-    this.clientService.getAllClients().subscribe(
-      (resultData: any) => {
+  getAllStudent(userId: number): void {
+    this.clientService.getAllClients(userId).subscribe(
+      (resultData: any[]) => { 
         this.isResultLoaded = true;
-        console.log(resultData.data);
-        this.clientArray = resultData.data;
+        console.log(resultData);
+        this.clientArray = resultData;
       },
       (error) => {
         console.log('erro ao buscar dados: ', error);
       }
     );
   }
+  
 
   register() {
     console.log('Dados enviados para o servidor:', this.formClient.value);
@@ -126,7 +136,6 @@ export class SignupComponent implements OnInit {
         next: (resultData: any) => {
           console.log(resultData);
           alert('Sucesso ao registrar');
-          this.getAllStudent();
 
           this.router.navigate(['/login'])
         },

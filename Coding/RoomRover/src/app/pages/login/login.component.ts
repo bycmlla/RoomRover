@@ -18,6 +18,8 @@ export class LoginComponent {
     this.clientService.authenticateClient(this.email, this.password).subscribe(
       (response) => {
         if (response.status) {
+          localStorage.setItem('token', response.token);
+          this.authService.setAuthenticationStatus(true);
           this.router.navigate(['/']); 
         } else {
           console.error('Falha na autenticação', response.message);

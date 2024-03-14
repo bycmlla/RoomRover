@@ -1,6 +1,4 @@
-<div class="navbar">
-  <app-navbar redirectOnLogoClick="'/'"></app-navbar>
-</div>
+<app-navbar [redirectOnLogoClick]="'/'"></app-navbar>
 
 <div>
   <div class="title">
@@ -9,30 +7,32 @@
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item"></li>
-    <div class="list-group-item">
-      <li>Nome</li>
-      <li>body.nome</li>
-    </div>
-    <div class="list-group-item">
-      <li>E-mail</li>
-      <li>body.email</li>
-    </div>
-    <div class="list-group-item">
-      <li>Telefone</li>
-      <li>body.telefone</li>
-    </div>
-    <div class="list-group-item">
-      <li>Data de Nascimento</li>
-      <li>body.dataDeNascimento</li>
-    </div>
-    <div class="list-group-item">
-      <li>Nacionalidade</li>
-      <li>body.nacionalidade</li>
-    </div>
-    <div class="list-group-item">
-      <li>Gênero</li>
-      <li>body.gênero</li>
-    </div>
+    <ng-container *ngFor="let user of userData">
+      <div class="list-group-item">
+        <li>Nome</li>
+        <li>{{ user.name }}</li>
+      </div>
+      <div class="list-group-item">
+        <li>E-mail</li>
+        <li>{{ user.email }}</li>
+      </div>
+      <div class="list-group-item">
+        <li>Telefone</li>
+        <li>{{ user.phone }}</li>
+      </div>
+      <div class="list-group-item">
+        <li>Data de Nascimento</li>
+        <li>{{ user.birthdate }}</li>
+      </div>
+      <div class="list-group-item">
+        <li>Nacionalidade</li>
+        <li>{{ user.nationality }}</li>
+      </div>
+      <div class="list-group-item">
+        <li>Gênero</li>
+        <li>{{ user.gender }}</li>
+      </div>
+    </ng-container>
   </ul>
 </div>
 

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Client } from '../../models/Client/client';
 import { AuthService } from '../auth/auth.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,10 @@ export class ClientService {
     });
   }
 
-  getAllClients(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:8080/form/read');
+  getAllClients(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8080/form/read/${userId}`).pipe(
+      map((response: any) => response.data)
+    );
   }
 
   authenticateClient(email: string, password: string): Observable<any> {

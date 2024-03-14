@@ -137,9 +137,10 @@ router.post("/form/login", (req, res) => {
   });
 });
 
-router.get("/form/read", (req, res) => {
-  const sql = "SELECT * FROM roomrover.client";
-  connection.query(sql, (error, result) => {
+router.get("/form/read/:userId", (req, res) => {
+  const userId = req.params.userId;
+  const sql = "SELECT * FROM roomrover.client WHERE idClient = ?";
+  connection.query(sql, [userId], (error, result) => {
     if (error) {
       res
         .status(500)
