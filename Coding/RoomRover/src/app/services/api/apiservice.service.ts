@@ -40,4 +40,8 @@ export class ClientService {
         })
       );
   }
+
+  updateUserData(userId: number, updatedData: any): Observable<any> {
+    return this.http.put<any>(`http://localhost:8080/form/update/${userId}`, updatedData)
+  }
 }

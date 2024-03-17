@@ -23,5 +23,11 @@ export class NavbarMainComponent {
       this.router.navigate([this.redirectOnLogoClick]);
     }
   }
+  logout(): void {
+    localStorage.removeItem('token');
+    this.authService.setAuthenticationStatus(false);
+    this.router.navigate(['/']);
+  }
+  
 
 }

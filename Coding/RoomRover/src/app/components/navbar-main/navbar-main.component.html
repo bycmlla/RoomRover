@@ -21,12 +21,17 @@
         >
           Login
         </button>
-        <button
-          *ngIf="isAuthenticated"
-          type="button"
-          routerLink="read-data"
-          class="my-data"
-        >Meus Dados</button>
+        <div>
+          <button
+            *ngIf="isAuthenticated"
+            type="button"
+            routerLink="read-data"
+            class="my-data"
+          >
+            Meus Dados
+          </button>
+          <i *ngIf="isAuthenticated" class="bi bi-box-arrow-right m-3" (click)="logout()"></i>
+        </div>
       </div>
     </div>
     <div class="navigation">
