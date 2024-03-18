@@ -29,14 +29,19 @@
   border-radius: 0px;
 }
 
-.btn-warning {
+.ok {
   background-color: #ff8845;
   color: #ffffff;
   padding: 7px 10px 7px 10px;
   font-size: 13px;
   border-radius: 2px;
 }
-
+.cancel{
+  padding: 7px 10px 7px 10px;
+  font-size: 13px;
+  border-radius: 2px;
+  margin-left: 10px;
+}
 .button-delete {
   margin-left: 150px;
   margin-bottom: 50px;
@@ -45,4 +50,35 @@
 .button-ok {
   margin-right: 160px;
   text-align: end; 
+}
+.input-error {
+  border-color: red;
+}
+
+.text-danger {
+  color: red;
+}
+
+.small {
+  font-size: 10px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.label-container {
+  position: relative;
+}
+
+.campos{
+  display: flex;
+  flex-direction: column;
+}
+select {
+  padding: 0 48px;
+}
+
+.date {
+  padding: 0 25px;
 }

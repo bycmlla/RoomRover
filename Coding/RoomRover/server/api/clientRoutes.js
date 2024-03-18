@@ -68,7 +68,7 @@ router.post("/form/add", (req, res) => {
                   };
 
                   let sqlClient = "INSERT INTO roomrover.client SET ?";
-  
+
                   connection.query(
                     sqlClient,
                     clientDetails,
@@ -98,7 +98,6 @@ router.post("/form/add", (req, res) => {
     }
   );
 });
-
 
 router.post("/form/login", (req, res) => {
   const { email, password } = req.body;
@@ -154,16 +153,20 @@ router.get("/form/read/:userId", (req, res) => {
     }
   });
 });
+
 router.put("/form/update/:userId", (req, res) => {
   const userId = req.params.userId;
-  const updatedData = req.body; 
+  const updatedData = req.body;
 
   const sql = "UPDATE roomrover.client SET ? WHERE idClient = ?";
   connection.query(sql, [updatedData, userId], (error, result) => {
     if (error) {
       res
         .status(500)
-        .send({ status: false, message: "Erro ao atualizar dados do formulário" });
+        .send({
+          status: false,
+          message: "Erro ao atualizar dados do formulário",
+        });
     } else {
       res.status(200).send({
         status: true,
@@ -173,5 +176,22 @@ router.put("/form/update/:userId", (req, res) => {
   });
 });
 
+router.delete("/form/delete/:userId", (req, res) => {
+  const userId = req.params.userId;
+
+  const sql = "DELETE FROM roomrover.client WHERE idClient = ?";
+  connection.query(sql, userId, (error, result) => {
+    if (error) {
+      res
+        .status(500)
+        .send({ status: false, message: "Erro ao apagar dados do formulário" });
+    } else {
+      res.status(200).send({
+        status: true,
+        message: "Usuario deletado com sucesso",
+      });
+    }
+  });
+});
 
 module.exports = router;

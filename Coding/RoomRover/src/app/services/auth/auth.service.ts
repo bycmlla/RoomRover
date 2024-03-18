@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -9,9 +10,9 @@ export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
   private userIdSubject = new BehaviorSubject<number>(0);
-  public userId = this.userIdSubject.asObservable(); 
+  public userId = this.userIdSubject.asObservable();
 
-  constructor() {
+  constructor(private router: Router) {
     this.checkAuthenticationStatus();
   }
 
@@ -38,5 +39,11 @@ export class AuthService {
       const userId = decodedToken.userId;
       this.userIdSubject.next(userId);
     }
+  }
+  logout(): void {
+    localStorage.removeItem('token');
+    this.setAuthenticationStatus(false);
+    this.userIdSubject.next(0);
+    this.router.navigate(['/login']);
   }
 }

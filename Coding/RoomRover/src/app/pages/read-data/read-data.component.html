@@ -16,13 +16,23 @@
         <ng-container
           *ngIf="isAllEditing || (isEditing && editedField === 'name')"
         >
-          <input type="text" [(ngModel)]="editedUserData.name" name="name" />
-          <button
-            class="btn btn-sm btn-success"
-            (click)="saveEdit('name', editedUserData.name)"
-          >
-            Salvar
-          </button>
+          <div class="campos">
+            <label *ngIf="fieldNotSaved" class="text-danger small italic">
+              Necessário salvar o campo para atualizar*
+            </label>
+            <input
+              type="text"
+              [(ngModel)]="editedUserData.name"
+              name="name"
+              [ngClass]="{ 'input-error': fieldNotSaved }"
+            />
+            <button
+              class="btn btn-sm btn-success"
+              (click)="saveEdit('name', editedUserData.name)"
+            >
+              Salvar
+            </button>
+          </div>
         </ng-container>
         <ng-container
           *ngIf="
@@ -30,9 +40,7 @@
             (!isEditing || (isEditing && editedField !== 'name'))
           "
         >
-          <li>
-            {{ user.name }}
-          </li>
+          <li>{{ user.name }}</li>
         </ng-container>
       </div>
 
@@ -41,13 +49,23 @@
         <ng-container
           *ngIf="isAllEditing || (isEditing && editedField === 'email')"
         >
-          <input type="email" [(ngModel)]="editedUserData.email" name="email" />
-          <button
-            class="btn btn-sm btn-success"
-            (click)="saveEdit('email', editedUserData.email)"
-          >
-            Salvar
-          </button>
+          <div class="campos">
+            <label *ngIf="fieldNotSaved" class="text-danger small italic">
+              Necessário salvar o campo para atualizar*
+            </label>
+            <input
+              type="email"
+              [(ngModel)]="editedUserData.email"
+              name="email"
+              [ngClass]="{ 'input-error': fieldNotSaved }"
+            />
+            <button
+              class="btn btn-sm btn-success"
+              (click)="saveEdit('email', editedUserData.email)"
+            >
+              Salvar
+            </button>
+          </div>
         </ng-container>
         <ng-container
           *ngIf="
@@ -55,9 +73,7 @@
             (!isEditing || (isEditing && editedField !== 'email'))
           "
         >
-          <li>
-            {{ user.email }}
-          </li>
+          <li>{{ user.email }}</li>
         </ng-container>
       </div>
 
@@ -66,13 +82,23 @@
         <ng-container
           *ngIf="isAllEditing || (isEditing && editedField === 'phone')"
         >
-          <input type="text" [(ngModel)]="editedUserData.phone" name="phone" />
-          <button
-            class="btn btn-sm btn-success"
-            (click)="saveEdit('phone', editedUserData.phone)"
-          >
-            Salvar
-          </button>
+          <div class="campos">
+            <label *ngIf="fieldNotSaved" class="text-danger small italic">
+              Necessário salvar o campo para atualizar*
+            </label>
+            <input
+              type="text"
+              [(ngModel)]="editedUserData.phone"
+              name="phone"
+              [ngClass]="{ 'input-error': fieldNotSaved }"
+            />
+            <button
+              class="btn btn-sm btn-success"
+              (click)="saveEdit('phone', editedUserData.phone)"
+            >
+              Salvar
+            </button>
+          </div>
         </ng-container>
         <ng-container
           *ngIf="
@@ -91,17 +117,27 @@
         <ng-container
           *ngIf="isAllEditing || (isEditing && editedField === 'birthdate')"
         >
-          <input
-            type="date"
-            [(ngModel)]="editedUserData.birthdate"
-            name="birthdate"
-          />
-          <button
-            class="btn btn-sm btn-success"
-            (click)="saveEdit('birthdate', editedUserData.birthdate)"
-          >
-            Salvar
-          </button>
+          <div class="campos">
+            <label *ngIf="fieldNotSaved" class="text-danger small italic">
+              Necessário salvar o campo para atualizar*
+            </label>
+            <input
+              type="date"
+              [(ngModel)]="editedUserData.birthdate"
+              name="birthdate"
+              [ngClass]="{ 'input-error': fieldNotSaved }"
+              class="date"
+              min="1920-01-01"
+              max="{{ currentDate() | date: 'yyyy-MM-dd' }}"
+              pattern="^\d{1,4}-\d{2}-\d{2}$"
+            />
+            <button
+              class="btn btn-sm btn-success"
+              (click)="saveEdit('birthdate', editedUserData.birthdate)"
+            >
+              Salvar
+            </button>
+          </div>
         </ng-container>
         <ng-container
           *ngIf="
@@ -110,7 +146,7 @@
           "
         >
           <li>
-            {{ user.birthdate }}
+            {{ user.birthdate | date: 'dd/MM/yyyy' }}
           </li>
         </ng-container>
       </div>
@@ -120,17 +156,23 @@
         <ng-container
           *ngIf="isAllEditing || (isEditing && editedField === 'nationality')"
         >
-          <input
-            type="text"
-            [(ngModel)]="editedUserData.nationality"
-            name="nationality"
-          />
-          <button
-            class="btn btn-sm btn-success"
-            (click)="saveEdit('nationality', editedUserData.nationality)"
-          >
-            Salvar
-          </button>
+          <div class="campos">
+            <label *ngIf="fieldNotSaved" class="text-danger small italic">
+              Necessário salvar o campo para atualizar*
+            </label>
+            <input
+              type="text"
+              [(ngModel)]="editedUserData.nationality"
+              name="nationality"
+              [ngClass]="{ 'input-error': fieldNotSaved }"
+            />
+            <button
+              class="btn btn-sm btn-success"
+              (click)="saveEdit('nationality', editedUserData.nationality)"
+            >
+              Salvar
+            </button>
+          </div>
         </ng-container>
         <ng-container
           *ngIf="
@@ -149,17 +191,26 @@
         <ng-container
           *ngIf="isAllEditing || (isEditing && editedField === 'gender')"
         >
-          <input
-            type="text"
-            [(ngModel)]="editedUserData.gender"
-            name="gender"
-          />
-          <button
-            class="btn btn-sm btn-success"
-            (click)="saveEdit('gender', editedUserData.gender)"
-          >
-            Salvar
-          </button>
+          <div class="campos">
+            <label *ngIf="fieldNotSaved" class="text-danger small italic">
+              Necessário salvar o campo para atualizar*
+            </label>
+            <select
+              [(ngModel)]="editedUserData.gender"
+              name="gender"
+              [ngClass]="{ 'input-error': fieldNotSaved }"
+            >
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+              <option value="Outro">Outro</option>
+            </select>
+            <button
+              class="btn btn-sm btn-success"
+              (click)="saveEdit('gender', editedUserData.gender)"
+            >
+              Salvar
+            </button>
+          </div>
         </ng-container>
         <ng-container
           *ngIf="
@@ -167,9 +218,7 @@
             (!isEditing || (isEditing && editedField !== 'gender'))
           "
         >
-          <li>
-            {{ user.gender }}
-          </li>
+          <li>{{ user.gender }}</li>
         </ng-container>
       </div>
     </ng-container>
@@ -177,10 +226,7 @@
 </div>
 
 <div class="button-ok">
-  <button type="button" class="btn btn-warning" (click)="okEdit()">Ok</button>
-</div>
-<div class="button-delete">
-  <button type="button" class="btn btn-danger">Excluir conta</button>
-</div>
+  <button type="button" *ngIf="isAllEditing" class="btn btn-warning ok" (click)="okEdit()">Ok</button>
+  <button class="btn btn-danger cancel" (click)="cancelEditing()" *ngIf="isAllEditing">cancelar</button>
 
 <app-footer></app-footer>

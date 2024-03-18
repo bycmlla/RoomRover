@@ -20,9 +20,9 @@ export class ClientService {
   }
 
   getAllClients(userId: number): Observable<any[]> {
-    return this.http.get<any[]>(`http://localhost:8080/form/read/${userId}`).pipe(
-      map((response: any) => response.data)
-    );
+    return this.http
+      .get<any[]>(`http://localhost:8080/form/read/${userId}`)
+      .pipe(map((response: any) => response.data));
   }
 
   authenticateClient(email: string, password: string): Observable<any> {
@@ -42,6 +42,22 @@ export class ClientService {
   }
 
   updateUserData(userId: number, updatedData: any): Observable<any> {
-    return this.http.put<any>(`http://localhost:8080/form/update/${userId}`, updatedData)
+    return this.http.put<any>(
+      `http://localhost:8080/form/update/${userId}`,
+      updatedData
+    );
   }
+
+  deleteUser(userId: number): Observable<any> {
+    return this.http.delete<any>(`http://localhost:8080/form/delete/${userId}`);
+  }
+
+  getCountry(): Observable<any[]> {
+    return this.http.get<any[]>('https://servicodados.ibge.gov.br/api/v1/paises/{paises}')
+      .pipe(
+        map((data: any[]) => data.map(item => item.nome.abreviado))
+      );
+  }
+  
+  
 }

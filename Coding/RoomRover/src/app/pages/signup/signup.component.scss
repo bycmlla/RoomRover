@@ -40,6 +40,15 @@
 
       }
     }
+    .form-group select {
+      width: 100%;
+      border: 2px solid #dd5f18;
+      border-radius: 5px;
+      margin-left: 15px;
+      font-size: 15px;
+      padding: 0.375rem 0.75rem;
+    }
+    
 
     .label-form {
       display: flex;
