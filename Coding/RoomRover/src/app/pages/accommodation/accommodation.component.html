@@ -1,6 +1,6 @@
 <app-navbar-main [redirectOnLogoClick]="'/'"></app-navbar-main>
 
-<div class="card m-4 mt-5 custom-shadow position-relative">
+<div *ngFor="let hotel of hotelData" class="card m-4 mt-5 custom-shadow position-relative">
   <div class="col-6 m-3 d-flex flex-row align-items-center">
     <div>
       <img
@@ -12,12 +12,10 @@
     </div>
 
     <div class="card-body">
-      <h5 class="card-title text-nowrap">Hotel name</h5>
-      <p class="card-text text-nowrap">Hotel cidade</p>
-      <p class="card-text text-nowrap">Diaria, quantidade adultos</p>
-      <h6 class="text-nowrap">Preço</h6>
+      <h5 class="card-title text-nowrap">{{ hotel.name }}</h5>
+      <p class="card-text text-nowrap">{{ hotel.adress }}</p>
       <p class="card-text text-success" style="text-align: justify">
-        descrição
+        {{ hotel.description }}
       </p>
       <button
         (click)="navigateToDetails()"

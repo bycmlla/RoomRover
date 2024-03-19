@@ -161,12 +161,10 @@ router.put("/form/update/:userId", (req, res) => {
   const sql = "UPDATE roomrover.client SET ? WHERE idClient = ?";
   connection.query(sql, [updatedData, userId], (error, result) => {
     if (error) {
-      res
-        .status(500)
-        .send({
-          status: false,
-          message: "Erro ao atualizar dados do formulário",
-        });
+      res.status(500).send({
+        status: false,
+        message: "Erro ao atualizar dados do formulário",
+      });
     } else {
       res.status(200).send({
         status: true,
@@ -179,17 +177,96 @@ router.put("/form/update/:userId", (req, res) => {
 router.delete("/form/delete/:userId", (req, res) => {
   const userId = req.params.userId;
 
-  const sql = "DELETE FROM roomrover.client WHERE idClient = ?";
-  connection.query(sql, userId, (error, result) => {
+  const getIdsSql =
+    "SELECT idaddressfk, idpassportfk FROM roomrover.client WHERE idclient = ?";
+
+  connection.query(getIdsSql, userId, (error, result) => {
     if (error) {
       res
         .status(500)
-        .send({ status: false, message: "Erro ao apagar dados do formulário" });
+        .send({
+          status: false,
+          message: "Erro ao obter IDs de endereço e passaporte",
+        });
     } else {
-      res.status(200).send({
-        status: true,
-        message: "Usuario deletado com sucesso",
-      });
+      if (result.length > 0) {
+        const idaddressfk = result[0].idaddressfk;
+        const idpassportfk = result[0].idpassportfk;
+
+        const deleteClientSql =
+          "DELETE FROM roomrover.client WHERE idClient = ?";
+        connection.query(deleteClientSql, userId, (error, clientResult) => {
+          if (error) {
+            console.error("Erro ao deletar cliente:", error);
+            res
+              .status(500)
+              .send({ status: false, message: "Erro ao deletar cliente" });
+          } else {
+            const deleteAddressSql =
+              "DELETE FROM roomrover.address WHERE idadress = ?";
+            connection.query(
+              deleteAddressSql,
+              idaddressfk,
+              (error, addressResult) => {
+                if (error) {
+                  console.error("Erro ao deletar endereço:", error);
+                  res
+                    .status(500)
+                    .send({
+                      status: false,
+                      message: "Erro ao deletar endereço",
+                    });
+                } else {
+                  const deletePassportSql =
+                    "DELETE FROM roomrover.passport WHERE idpassport = ?";
+                  connection.query(
+                    deletePassportSql,
+                    idpassportfk,
+                    (error, passportResult) => {
+                      if (error) {
+                        console.error("Erro ao deletar passaporte:", error);
+                        res
+                          .status(500)
+                          .send({
+                            status: false,
+                            message: "Erro ao deletar passaporte",
+                          });
+                      } else {
+                        res
+                          .status(200)
+                          .send({
+                            status: true,
+                            message:
+                              "Usuário e dados relacionados deletados com sucesso",
+                          });
+                      }
+                    }
+                  );
+                }
+              }
+            );
+          }
+        });
+      } else {
+        res
+          .status(404)
+          .send({ status: false, message: "Usuário não encontrado" });
+      }
+    }
+  });
+});
+
+router.get("/form/hotels", (req, res) => {
+  const sql = "SELECT * FROM roomrover.hotel";
+  
+  connection.query(sql, (error, results) => {
+    if (error) {
+      console.error("Erro ao obter dados dos hotéis:", error);
+      res
+        .status(500)
+        .send({ status: false, message: "Erro ao obter dados dos hotéis" });
+    } else {
+      res.status(200).send({ status: true, data: results });
     }
   });
 });

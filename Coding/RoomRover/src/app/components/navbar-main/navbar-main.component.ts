@@ -28,6 +28,10 @@ export class NavbarMainComponent {
     this.authService.setAuthenticationStatus(false);
     this.router.navigate(['/']);
   }
-  
+  myData(): void {
+    this.router.navigate(['read-data']).then(() => {
+      window.location.reload();
+    });
+  }
 
 }

@@ -33,6 +33,7 @@
           class="form-control"
           placeholder="Telefone"
           formControlName="phone"
+          maxlength="11"
         />
       </div>
 
@@ -43,6 +44,9 @@
           class="form-control"
           placeholder="Data de nascimento"
           formControlName="nascimento"
+          min="1920-01-01"
+          max="{{ currentDate() | date : 'yyyy-MM-dd' }}"
+          pattern="^\d{1,4}-\d{2}-\d{2}$"
         />
       </div>
     </div>
@@ -60,35 +64,35 @@
 
       <div class="form-group">
         <label for="genero">Gênero</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Gênero"
-          formControlName="genero"
-        />
+        <select formControlName="genero">
+          <option value="" disabled selected>Selecione o Gênero</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Feminino">Feminino</option>
+          <option value="Outro">Outro</option>
+        </select>
       </div>
     </div>
-    
+
     <div class="form-row">
       <div class="form-group">
         <div class="label-form">
           <span *ngIf="!showAddressForm && !showPassportForm">
             Endereço
             <button
-            type="button"
-            class="btn custom-btn"
-            (click)="toggleAddressForm()"
+              type="button"
+              class="btn custom-btn"
+              (click)="toggleAddressForm()"
             >
-            Inserir
-          </button>
-        </span>
-        <span *ngIf="!showAddressForm && !showPassportForm">
-          Dados do Passaporte
+              Inserir
+            </button>
+          </span>
+          <span *ngIf="!showAddressForm && !showPassportForm">
+            Dados do Passaporte
             <button
               type="button"
               class="btn custom-btn"
               (click)="togglePassportForm()"
-              >
+            >
               Inserir
             </button>
           </span>
@@ -99,8 +103,9 @@
         <input
           type="password"
           class="form-control"
-          placeholder="Senha"
+          placeholder="Senha (máx 10 carácteres)"
           formControlName="senha"
+          maxlength="10"
         />
       </div>
     </div>
@@ -110,12 +115,12 @@
       <div [formGroup]="formAddress">
         <div class="form-address-group">
           <label for="pais">País</label>
-          <input
-            type="text"
-            class="form-address"
-            placeholder="Selecione o seu país"
-            formControlName="pais"
-          />
+          <select class="form-address" formControlName="pais">
+            <option value="" disabled selected>Selecione o seu país</option>
+            <option *ngFor="let pais of country" [value]="pais">
+              {{ pais }}
+            </option>
+          </select>
         </div>
         <div class="form-address-group">
           <label for="endereco">Endereço</label>
@@ -144,6 +149,7 @@
               class="form-address"
               placeholder="CEP"
               formControlName="cep"
+              maxlength="10"
             />
           </div>
         </div>
@@ -168,27 +174,35 @@
           <input
             type="text"
             class="form-address"
-            placeholder="Número"
+            placeholder="Número (1 a 8 digitos)"
             formControlName="numero"
+            pattern="^\d{1,8}$"
+            maxlength="8"
           />
         </div>
         <div class="form-two-end">
           <div class="form-address-group">
             <label for="paisEmissor">Selecione o país emissor</label>
-            <input
-              type="text"
-              class="form-address"
-              placeholder="País Emissor"
-              formControlName="paisEmissor"
-            />
+            <select class="form-address" formControlName="paisEmissor">
+              <option value="" disabled selected>
+                Selecione o país emissor
+              </option>
+              <option *ngFor="let pais of country" [value]="pais">
+                {{ pais }}
+              </option>
+            </select>
           </div>
+
           <div class="form-address-group">
             <label for="dataExpiracao">Data de Expiração</label>
             <input
-              type="text"
+              type="date"
               class="form-address"
               placeholder="Data de Expiração"
               formControlName="dataExpiracao"
+              min="1920-01-01"
+              max="{{ currentDate() | date : 'yyyy-MM-dd' }}"
+              pattern="^\d{1,4}-\d{2}-\d{2}$"
             />
           </div>
         </div>

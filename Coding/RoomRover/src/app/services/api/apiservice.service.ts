@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import { Client } from '../../models/Client/client';
 import { AuthService } from '../auth/auth.service';
 import { map } from 'rxjs/operators';
+import { Hotel } from 'src/app/models/Hotel/hotel';
 
 @Injectable({
   providedIn: 'root',
@@ -53,11 +54,13 @@ export class ClientService {
   }
 
   getCountry(): Observable<any[]> {
-    return this.http.get<any[]>('https://servicodados.ibge.gov.br/api/v1/paises/{paises}')
-      .pipe(
-        map((data: any[]) => data.map(item => item.nome.abreviado))
-      );
+    return this.http
+      .get<any[]>('https://servicodados.ibge.gov.br/api/v1/paises/{paises}')
+      .pipe(map((data: any[]) => data.map((item) => item.nome.abreviado)));
   }
-  
-  
+
+  getHotelData(): Observable<Hotel[]> {
+    return this.http.get<Hotel[]>('http://localhost:8080/form/hotels')
+    .pipe(map((response: any) => response.data));
+  }
 }

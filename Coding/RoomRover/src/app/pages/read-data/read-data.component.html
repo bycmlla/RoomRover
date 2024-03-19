@@ -225,10 +225,10 @@
   </ul>
 </div>
 
-<div class="button-ok">
+<div class="button-ok mb-4">
   <button type="button" *ngIf="isAllEditing" class="btn btn-warning ok" (click)="okEdit()">Ok</button>
+  <button type="button" class="btn btn-danger cancel" (click)="deleteAccount()" *ngIf="isAllEditing">Excluir sua conta</button>
   <button class="btn btn-danger cancel" (click)="cancelEditing()" *ngIf="isAllEditing">cancelar</button>
-  <button (click)="deleteAccount()"></button>
 </div>
 
 <app-footer></app-footer>
