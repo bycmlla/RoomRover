@@ -228,5 +228,7 @@
 <div class="button-ok">
   <button type="button" *ngIf="isAllEditing" class="btn btn-warning ok" (click)="okEdit()">Ok</button>
   <button class="btn btn-danger cancel" (click)="cancelEditing()" *ngIf="isAllEditing">cancelar</button>
+  <button (click)="deleteAccount()"></button>
+</div>
 
 <app-footer></app-footer>

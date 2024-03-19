@@ -6,13 +6,10 @@ import { Client } from 'src/app/models/Client/client';
 import { Address } from 'src/app/models/Address/address';
 import { Passport } from './../../models/Passport/passport';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { DatePipe } from '@angular/common';
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
-  providers: [DatePipe],
 })
 export class SignupComponent implements OnInit {
   clientArray: any[] = [];
@@ -24,15 +21,9 @@ export class SignupComponent implements OnInit {
   formPassport!: FormGroup;
   savedAddressData: any = {};
   savedPassportData: any = {};
-  country: string[] = [];
 
-  constructor(
-    private fb: FormBuilder,
-    private clientService: ClientService,
-    private router: Router,
-    private authService: AuthService,
-    datePipe: DatePipe
-  ) {}
+  constructor(private fb: FormBuilder, private clientService: ClientService, private router: Router, private authService: AuthService) {
+  }
 
   ngOnInit(): void {
     this.createAddress(new Address('', '', '', ''));
@@ -62,13 +53,12 @@ export class SignupComponent implements OnInit {
         console.error('Erro ao obter userId:', error);
       }
     );
-    this.loadCountry();
   }
 
   createForm(client: Client) {
     this.formClient = this.fb.group({
       nome: [client.name, Validators.required],
-      email: [client.email, Validators.required, Validators.email],
+      email: [client.email, Validators.email],
       phone: [client.phone, Validators.required],
       nascimento: [client.birthdate, Validators.required],
       nacionalidade: [client.nationality, Validators.required],
@@ -102,6 +92,7 @@ export class SignupComponent implements OnInit {
     this.showAddressForm = false;
     console.log(this.savedAddressData);
   }
+  
 
   savePassport() {
     this.savedPassportData = this.formPassport.value;
@@ -120,7 +111,7 @@ export class SignupComponent implements OnInit {
 
   getAllStudent(userId: number): void {
     this.clientService.getAllClients(userId).subscribe(
-      (resultData: any[]) => {
+      (resultData: any[]) => { 
         this.isResultLoaded = true;
         console.log(resultData);
         this.clientArray = resultData;
@@ -130,6 +121,7 @@ export class SignupComponent implements OnInit {
       }
     );
   }
+  
 
   register() {
     console.log('Dados enviados para o servidor:', this.formClient.value);
@@ -139,13 +131,13 @@ export class SignupComponent implements OnInit {
         endereco: this.formAddress.value,
         passaporte: this.formPassport.value,
       };
-
+  
       this.clientService.addClient(bodyData).subscribe({
         next: (resultData: any) => {
           console.log(resultData);
           alert('Sucesso ao registrar');
 
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login'])
         },
         error: (error) => {
           console.error('Erro ao registrar:', error);
@@ -157,30 +149,5 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     console.log(this.formClient.value);
     this.register();
-    this.markAllFieldsAsTouched(this.formClient);
-  }
-  currentDate(): Date {
-    return new Date();
-  }
-  loadCountry() {
-    this.clientService.getCountry().subscribe(
-      (data) => {
-        this.country = data;
-      },
-      (error) => {
-        console.error('Erro ao carregar os países:', error);
-      }
-    );
-  }
-
-  markAllFieldsAsTouched(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach(field => {
-      const control = formGroup.get(field);
-      if (control instanceof FormGroup) {
-        this.markAllFieldsAsTouched(control);
-      } else {
-        control?.markAsTouched();
-      }
-    });
   }
 }
