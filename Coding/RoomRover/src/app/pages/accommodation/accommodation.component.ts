@@ -27,8 +27,8 @@ export class AccommodationComponent implements OnInit {
       }
     );
   }
-
-  navigateToDetails() {
-    this.router.navigate(['/accommodations-details']);
+  navigateToDetails(idhotelfk: number) {
+    this.router.navigate(['/accommodations-details', idhotelfk]);
   }
+  
 }

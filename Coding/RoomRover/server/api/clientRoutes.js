@@ -270,5 +270,43 @@ router.get("/form/hotels", (req, res) => {
     }
   });
 });
+router.get("/form/rooms/:idhotelfk", (req, res) => {
+  const idhotelfk = req.params.idhotelfk;
+  const sql = "SELECT * FROM roomrover.rooms WHERE idhotelfk = ?";
+
+  connection.query(sql, [idhotelfk], (error, results) => {
+    if (error) {
+      console.error("Erro ao obter dados dos quartos:", error);
+      res
+        .status(500)
+        .send({ status: false, message: "Erro ao obter dados dos quartos" });
+    } else {
+      res.status(200).send({ status: true, data: results });
+    }
+  });
+});
+
+router.post("/form/rooms/reservation", (req, res) => {
+  const reservationData = req.body;
+  console.log("Dados da reserva recebidos no servidor:", reservationData);
+
+  const sql = "INSERT INTO roomrover.reservation SET ?";
+  connection.query(sql, reservationData, (error, result) => {
+    if (error) {
+      console.error("Erro ao inserir reserva no banco de dados:", error);
+      res.status(500).send({
+        status: false,
+        message: "Erro ao inserir reserva no banco de dados",
+      });
+    } else {
+      console.log("Reserva inserida no banco de dados com sucesso.");
+      res.status(200).send({
+        status: true,
+        message: "Reserva realizada com sucesso!",
+      });
+    }
+  });
+});
+
 
 module.exports = router;

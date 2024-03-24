@@ -33,10 +33,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="pb-5 pt-3">body.categoria</td>
-          <td class="pb-5 pt-3">body.pessoas</td>
-          <td class="pb-5 pt-3">body.valor</td>
+        <tr *ngFor="let room of rooms">
+          <td class="pb-5 pt-3">{{ room.type }}</td>
+          <td class="pb-5 pt-3">{{ room.capacity }}</td>
+          <td class="pb-5 pt-3">{{ room.priceroom }}</td>
           <td class="pb-5 pt-3">
             <select
               name="0"
@@ -59,20 +59,35 @@
           id="dataEntrada"
           name="dataEntrada"
           class="form-control shadow-sm rounded-1"
+          [(ngModel)]="dataEntrada"
         />
       </div>
       <div class="ms-3 mb-3">
         <label class="label">Data de saída</label>
         <input
           type="date"
-          id="dataEntrada"
-          name="dataEntrada"
+          id="dataSaida"
+          name="dataSaida"
           class="form-control shadow-sm rounded-1"
+          [(ngModel)]="dataSaida"
         />
       </div>
-      <div class="ms-4">
-        <button class="btn btn-warning">Realizar reserva</button>
+      <div class="ms-3 mb-3">
+        <label class="label">Escolha o quarto</label>
+        <select
+          name="quarto"
+          id="quarto"
+          class="form-select form-select-sm p-1 shadow-sm"
+          [(ngModel)]="selectedRoomId"
+        >
+          <option *ngFor="let room of rooms" [value]="room.idrooms">
+            {{ room.type }}
+          </option>
+        </select>
       </div>
+      <div class="ms-4">
+        <button class="btn btn-warning" (click)="reserveRoom()">Realizar reserva</button>
+      </div>      
     </div>
   </div>
 </div>

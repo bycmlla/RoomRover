@@ -6,6 +6,8 @@ import { Client } from '../../models/Client/client';
 import { AuthService } from '../auth/auth.service';
 import { map } from 'rxjs/operators';
 import { Hotel } from 'src/app/models/Hotel/hotel';
+import { Room } from 'src/app/models/Room/room';
+import { Reservation } from 'src/app/models/Reservation/reservation';
 
 @Injectable({
   providedIn: 'root',
@@ -63,4 +65,17 @@ export class ClientService {
     return this.http.get<Hotel[]>('http://localhost:8080/form/hotels')
     .pipe(map((response: any) => response.data));
   }
+
+  getRoomsForHotel(idhotelfk: number): Observable<Room[]> {
+    return this.http.get<Room[]>(`http://localhost:8080/form/rooms/${idhotelfk}`)
+    .pipe(map((response: any) => response.data));
+  }
+
+  reserveRoom(reservaData: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/form/rooms/reservation', reservaData);
+  }
+  getReservationsForUser(userId: number): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`/api/reservations/${userId}`);
+  }
+  
 }

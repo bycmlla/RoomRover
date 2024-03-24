@@ -17,6 +17,7 @@ import { AccommodationComponent } from './pages/accommodation/accommodation.comp
 import { AccommodationDetailsComponent } from './pages/accommodation-details/accommodation-details.component';
 import { ReservationsComponent } from './pages/reservations/reservations.component';
 import { ReservationsDetailsComponent } from './pages/reservations-details/reservations-details.component';
+import { MessageComponent } from './components/message/message.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ReservationsDetailsComponent } from './pages/reservations-details/reser
     AccommodationComponent,
     AccommodationDetailsComponent,
     ReservationsComponent,
-    ReservationsDetailsComponent
+    ReservationsDetailsComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

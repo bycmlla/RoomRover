@@ -8,15 +8,17 @@ import { AccommodationComponent } from './pages/accommodation/accommodation.comp
 import { AccommodationDetailsComponent } from './pages/accommodation-details/accommodation-details.component';
 import { ReservationsComponent } from './pages/reservations/reservations.component';
 import { ReservationsDetailsComponent } from './pages/reservations-details/reservations-details.component';
+import { MessageComponent } from './components/message/message.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'read-data', component: ReadDataComponent },
   { path: 'accommodations', component: AccommodationComponent },
-  { path: 'accommodations-details', component: AccommodationDetailsComponent },
+  { path: 'accommodations-details/:idhotelfk', component: AccommodationDetailsComponent },
   { path: 'reservations', component: ReservationsComponent },
   { path: 'reservations-details', component: ReservationsDetailsComponent },  
+  { path: 'message', component: MessageComponent },  
 ];
 
 @NgModule({
