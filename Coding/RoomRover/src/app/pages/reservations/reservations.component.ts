@@ -3,11 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from 'src/app/services/api/apiservice.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Reservation } from 'src/app/models/Reservation/reservation';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.component.html',
   styleUrls: ['./reservations.component.scss'],
+  providers: [DatePipe],
 })
 export class ReservationsComponent implements OnInit {
   reservations: Reservation[] = [];
@@ -17,6 +19,7 @@ export class ReservationsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private apiService: ClientService,
+    private datePipe: DatePipe,
     private authService: AuthService
   ) {}
 
@@ -47,8 +50,24 @@ export class ReservationsComponent implements OnInit {
       }
     );
   }
-
   navigateToDetails(reservationId: number) {
     this.router.navigate(['/reservations-details', reservationId]);
   }
+  cancelReservation(reservationId: number) {
+  const confirmation = confirm('Tem certeza que deseja cancelar essa reserva?');
+  if (confirmation) {
+    this.apiService.cancelReservation(reservationId).subscribe(
+      () => {
+        console.log('Reserva cancelada com sucesso.');
+        this.getReservationsForUser(this.userId!);
+      },
+      (error) => {
+        console.error('Erro ao cancelar reserva:', error);
+      }
+    );
+  } else {
+    console.log('A exclusão da reserva foi cancelada pelo usuário.');
+  }
+}
+
 }

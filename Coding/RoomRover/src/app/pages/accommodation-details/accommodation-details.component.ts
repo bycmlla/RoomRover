@@ -16,13 +16,13 @@ export class AccommodationDetailsComponent implements OnInit {
   dataSaida: string = '';
   selectedRoomId: number | null = null;
   userId: number | null = null;
-
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private apiService: ClientService,
     private authService: AuthService
-  ) {}  
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -61,12 +61,10 @@ export class AccommodationDetailsComponent implements OnInit {
       );
       return;
     }
-    console.log('ID do quarto selecionado:', this.selectedRoomId)
+    console.log('ID do quarto selecionado:', this.selectedRoomId);
     const selectedRoomId = Number(this.selectedRoomId);
 
-    const room = this.rooms.find(
-      (room) => room.idrooms === selectedRoomId
-    );
+    const room = this.rooms.find((room) => room.idrooms === selectedRoomId);
     if (room) {
       console.log('Quarto encontrado:', room);
       console.log('Preço do quarto:', room.priceroom);
@@ -81,12 +79,21 @@ export class AccommodationDetailsComponent implements OnInit {
       this.apiService.reserveRoom(reservaData).subscribe(
         () => {
           console.log('Reserva realizada com sucesso!');
-          this.router.navigate(['message'], { queryParams: { message: 'Reserva realizada com sucesso!', messageButton: 'Ir para reservas' } });
+          this.router.navigate(['message'], {
+            queryParams: {
+              message: 'Reserva realizada com sucesso!',
+              messageButton: 'Ir para reservas',
+            },
+          });
         },
         (error) => {
           console.error('Erro ao realizar reserva:', error);
         }
       );
     }
+  }
+
+  currentDate(): Date {
+    return new Date();
   }
 }

@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'accommodations', component: AccommodationComponent },
   { path: 'accommodations-details/:idhotelfk', component: AccommodationDetailsComponent },
   { path: 'reservations', component: ReservationsComponent },
-  { path: 'reservations-details', component: ReservationsDetailsComponent },  
+  { path: 'reservations-details/:idReservation', component: ReservationsDetailsComponent },  
   { path: 'message', component: MessageComponent },  
 ];
 

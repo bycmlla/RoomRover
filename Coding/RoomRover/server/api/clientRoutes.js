@@ -179,64 +179,75 @@ router.delete("/form/delete/:userId", (req, res) => {
 
   const getIdsSql =
     "SELECT idaddressfk, idpassportfk FROM roomrover.client WHERE idclient = ?";
-
   connection.query(getIdsSql, userId, (error, result) => {
     if (error) {
       res.status(500).send({
         status: false,
-        message: "Erro ao obter IDs de endereço e passaporte",
+        message: "Erro ao obter IDs de endereço e passaporte do cliente",
       });
     } else {
       if (result.length > 0) {
         const idaddressfk = result[0].idaddressfk;
         const idpassportfk = result[0].idpassportfk;
 
-        const deleteClientSql =
-          "DELETE FROM roomrover.client WHERE idClient = ?";
-        connection.query(deleteClientSql, userId, (error, clientResult) => {
+        const deleteReservationSql =
+          "DELETE FROM roomrover.reservation WHERE idclientfk = ?";
+        connection.query(deleteReservationSql, userId, (error, reservationResult) => {
           if (error) {
-            console.error("Erro ao deletar cliente:", error);
-            res
-              .status(500)
-              .send({ status: false, message: "Erro ao deletar cliente" });
+            res.status(500).send({
+              status: false,
+              message: "Erro ao deletar reservas do cliente",
+            });
           } else {
-            const deleteAddressSql =
-              "DELETE FROM roomrover.address WHERE idadress = ?";
-            connection.query(
-              deleteAddressSql,
-              idaddressfk,
-              (error, addressResult) => {
-                if (error) {
-                  console.error("Erro ao deletar endereço:", error);
-                  res.status(500).send({
-                    status: false,
-                    message: "Erro ao deletar endereço",
-                  });
-                } else {
-                  const deletePassportSql =
-                    "DELETE FROM roomrover.passport WHERE idpassport = ?";
-                  connection.query(
-                    deletePassportSql,
-                    idpassportfk,
-                    (error, passportResult) => {
-                      if (error) {
-                        console.error("Erro ao deletar passaporte:", error);
-                        res.status(500).send({
-                          status: false,
-                          message: "Erro ao deletar passaporte",
-                        });
-                      } else {
-                        res.status(200).send({
-                          status: true,
-                          message:
-                            "Usuário e dados relacionados deletados com sucesso",
-                        });
-                      }
+            const deleteClientSql =
+              "DELETE FROM roomrover.client WHERE idClient = ?";
+            connection.query(deleteClientSql, userId, (error, clientResult) => {
+              if (error) {
+                console.error("Erro ao deletar cliente:", error);
+                res.status(500).send({
+                  status: false,
+                  message: "Erro ao deletar cliente",
+                });
+              } else {
+                const deleteAddressSql =
+                  "DELETE FROM roomrover.address WHERE idadress = ?";
+                connection.query(
+                  deleteAddressSql,
+                  idaddressfk,
+                  (error, addressResult) => {
+                    if (error) {
+                      console.error("Erro ao deletar endereço:", error);
+                      res.status(500).send({
+                        status: false,
+                        message: "Erro ao deletar endereço",
+                      });
+                    } else {
+                      const deletePassportSql =
+                        "DELETE FROM roomrover.passport WHERE idpassport = ?";
+                      connection.query(
+                        deletePassportSql,
+                        idpassportfk,
+                        (error, passportResult) => {
+                          if (error) {
+                            console.error("Erro ao deletar passaporte:", error);
+                            res.status(500).send({
+                              status: false,
+                              message: "Erro ao deletar passaporte",
+                            });
+                          } else {
+                            res.status(200).send({
+                              status: true,
+                              message:
+                                "Usuário, reservas e dados relacionados deletados com sucesso",
+                            });
+                          }
+                        }
+                      );
                     }
-                  );
-                }
+                  }
+                );
               }
-            );
+            });
           }
         });
       } else {
@@ -330,5 +341,58 @@ router.get("/form/reservation/list/:userId", (req, res) => {
     res.status(200).json(results);
   });
 });
+
+router.get("/form/reservations/details/:idReservation", (req, res) => {
+  const idReservation = req.params.idReservation;
+
+  let sql = `
+    SELECT 
+      r.idreservation, 
+      h.name AS hotelName, 
+      r.checkin, 
+      r.checkout, 
+      rm.priceroom AS valorHospedagem
+    FROM 
+      reservation r 
+    JOIN 
+      rooms rm ON r.idroomfk = rm.idrooms 
+    JOIN 
+      hotel h ON rm.idhotelfk = h.idhotel 
+    WHERE 
+      r.idreservation = ?
+  `;
+
+  connection.query(sql, [idReservation], (error, results, fields) => {
+    if (error) {
+      console.error("Erro ao executar a consulta SQL:", error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+      return;
+    }
+
+    if (results.length === 0) {
+      res.status(404).json({ error: "Reserva não encontrada" });
+      return;
+    }
+
+    const reservationDetails = results[0];
+    res.status(200).json(reservationDetails);
+  });
+});
+
+router.delete("/form/reservations/cancel/:idReservation", (req, res) => {
+  const idReservation = req.params.idReservation;
+
+  let sql = `DELETE FROM roomrover.reservation WHERE idreservation = ?`;
+
+  connection.query(sql, [idReservation], (error, results, fields) => {
+    if (error) {
+      console.error("Erro ao cancelar reserva:", error);
+      res.status(500).json({ error: "Erro interno do servidor ao cancelar reserva" });
+      return;
+    }
+
+    res.status(200).json({ message: "Reserva cancelada com sucesso" });
+  });
+})
 
 module.exports = router;

@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { Hotel } from 'src/app/models/Hotel/hotel';
 import { Room } from 'src/app/models/Room/room';
 import { Reservation } from 'src/app/models/Reservation/reservation';
-
+import { Details } from 'src/app/models/ReservationDetails/details';
 @Injectable({
   providedIn: 'root',
 })
@@ -83,5 +83,12 @@ export class ClientService {
     return this.http.get<Reservation[]>(
       `http://localhost:8080/form/reservation/list/${userId}`
     );
+  }
+  
+  getReservationDetails(idReservation: number): Observable<Details> {
+    return this.http.get<Details>(`http://localhost:8080/form/reservations/details/${idReservation}`);
+  }
+  cancelReservation(idReservation: number): Observable<any> {
+    return this.http.delete<any>(`http://localhost:8080/form/reservations/cancel/${idReservation}`);
   }
 }

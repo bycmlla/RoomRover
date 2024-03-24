@@ -16,8 +16,8 @@
           <ul class="list-unstyled mt-3 mb-4 border-bottom">
             <li>{{ reservation.adress }}</li>
             <li class="pb-3">
-              <i class="bi bi-calendar-event"></i> {{ reservation.checkin }} -
-              {{ reservation.checkout }}
+              <i class="bi bi-calendar-event"></i> {{ reservation.checkin | date: 'dd/MM/yyyy'  }} -
+              {{ reservation.checkout | date: 'dd/MM/yyyy'  }}
             </li>
           </ul>
           <div class="text-center">
@@ -28,7 +28,7 @@
             >
               Detalhes
             </button>
-            <button type="button" class="btn btn-lg btn-block btn-outline">
+            <button type="button" class="btn btn-lg btn-block btn-outline" (click)="cancelReservation(reservation.idreservation)">
               Cancelar
             </button>
           </div>
