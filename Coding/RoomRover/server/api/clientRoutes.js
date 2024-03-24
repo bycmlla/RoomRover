@@ -182,12 +182,10 @@ router.delete("/form/delete/:userId", (req, res) => {
 
   connection.query(getIdsSql, userId, (error, result) => {
     if (error) {
-      res
-        .status(500)
-        .send({
-          status: false,
-          message: "Erro ao obter IDs de endereço e passaporte",
-        });
+      res.status(500).send({
+        status: false,
+        message: "Erro ao obter IDs de endereço e passaporte",
+      });
     } else {
       if (result.length > 0) {
         const idaddressfk = result[0].idaddressfk;
@@ -210,12 +208,10 @@ router.delete("/form/delete/:userId", (req, res) => {
               (error, addressResult) => {
                 if (error) {
                   console.error("Erro ao deletar endereço:", error);
-                  res
-                    .status(500)
-                    .send({
-                      status: false,
-                      message: "Erro ao deletar endereço",
-                    });
+                  res.status(500).send({
+                    status: false,
+                    message: "Erro ao deletar endereço",
+                  });
                 } else {
                   const deletePassportSql =
                     "DELETE FROM roomrover.passport WHERE idpassport = ?";
@@ -225,20 +221,16 @@ router.delete("/form/delete/:userId", (req, res) => {
                     (error, passportResult) => {
                       if (error) {
                         console.error("Erro ao deletar passaporte:", error);
-                        res
-                          .status(500)
-                          .send({
-                            status: false,
-                            message: "Erro ao deletar passaporte",
-                          });
+                        res.status(500).send({
+                          status: false,
+                          message: "Erro ao deletar passaporte",
+                        });
                       } else {
-                        res
-                          .status(200)
-                          .send({
-                            status: true,
-                            message:
-                              "Usuário e dados relacionados deletados com sucesso",
-                          });
+                        res.status(200).send({
+                          status: true,
+                          message:
+                            "Usuário e dados relacionados deletados com sucesso",
+                        });
                       }
                     }
                   );
@@ -258,7 +250,7 @@ router.delete("/form/delete/:userId", (req, res) => {
 
 router.get("/form/hotels", (req, res) => {
   const sql = "SELECT * FROM roomrover.hotel";
-  
+
   connection.query(sql, (error, results) => {
     if (error) {
       console.error("Erro ao obter dados dos hotéis:", error);
@@ -308,5 +300,35 @@ router.post("/form/rooms/reservation", (req, res) => {
   });
 });
 
+router.get("/form/reservation/list/:userId", (req, res) => {
+  let userId = req.params.userId;
+
+  let sql = `
+  SELECT 
+    r.idreservation, 
+    r.checkin, 
+    r.checkout, 
+    h.name AS hotelName, 
+    h.adress 
+  FROM 
+    roomrover.reservation r 
+  JOIN 
+    roomrover.rooms rm ON r.idroomfk = rm.idrooms 
+  JOIN 
+    roomrover.hotel h ON rm.idhotelfk = h.idhotel 
+  WHERE 
+    r.idclientfk = ?
+`;
+
+  connection.query(sql, [userId], (error, results, fields) => {
+    if (error) {
+      console.error("Erro ao executar a consulta SQL:", error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+      return;
+    }
+
+    res.status(200).json(results);
+  });
+});
 
 module.exports = router;

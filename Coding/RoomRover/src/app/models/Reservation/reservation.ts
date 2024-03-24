@@ -1,7 +1,7 @@
 export interface Reservation {
-    idReservation: number;
-    hotelName: string;
-    city: string;
-    checkin: string;
-    checkout: string;
+  idreservation: number;
+  hotelName: string;
+  adress: string;
+  checkin: Date;
+  checkout: Date;
 }

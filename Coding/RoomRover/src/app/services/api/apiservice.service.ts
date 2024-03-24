@@ -62,20 +62,26 @@ export class ClientService {
   }
 
   getHotelData(): Observable<Hotel[]> {
-    return this.http.get<Hotel[]>('http://localhost:8080/form/hotels')
-    .pipe(map((response: any) => response.data));
+    return this.http
+      .get<Hotel[]>('http://localhost:8080/form/hotels')
+      .pipe(map((response: any) => response.data));
   }
 
   getRoomsForHotel(idhotelfk: number): Observable<Room[]> {
-    return this.http.get<Room[]>(`http://localhost:8080/form/rooms/${idhotelfk}`)
-    .pipe(map((response: any) => response.data));
+    return this.http
+      .get<Room[]>(`http://localhost:8080/form/rooms/${idhotelfk}`)
+      .pipe(map((response: any) => response.data));
   }
 
   reserveRoom(reservaData: any): Observable<any> {
-    return this.http.post<any>('http://localhost:8080/form/rooms/reservation', reservaData);
+    return this.http.post<any>(
+      'http://localhost:8080/form/rooms/reservation',
+      reservaData
+    );
   }
   getReservationsForUser(userId: number): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`/api/reservations/${userId}`);
+    return this.http.get<Reservation[]>(
+      `http://localhost:8080/form/reservation/list/${userId}`
+    );
   }
-  
 }
