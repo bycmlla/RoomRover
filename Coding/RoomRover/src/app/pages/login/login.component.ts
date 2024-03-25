@@ -12,6 +12,10 @@ export class LoginComponent {
 
   email: string = '';
   password: string = '';
+  emailError: boolean = false;
+  passwordError: boolean = false;
+  loginError: boolean = false;
+
   constructor(private clientService: ClientService, private authService: AuthService, private router: Router) {}
 
   login(): void {
@@ -23,10 +27,16 @@ export class LoginComponent {
           this.router.navigate(['/']); 
         } else {
           console.error('Falha na autenticação', response.message);
+          this.loginError = true;
+          this.emailError = true; 
+          this.passwordError = true;
         }
       },
       (error) => {
         console.error('Erro na autenticação: ', error);
+        this.loginError = true; 
+        this.emailError = true; 
+        this.passwordError = true;
       }
     );
   }

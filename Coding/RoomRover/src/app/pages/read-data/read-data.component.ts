@@ -124,12 +124,23 @@ export class ReadDataComponent implements OnInit {
       this.fieldNotSaved = true;
     }
   }
+
   cancelEditing(): void {
     this.isAllEditing = false;
   }
+
   currentDate(): Date {
     return new Date();
   }
+  confirmDeleteAccount(): void {
+  const confirmDelete = confirm('Deseja realmente deletar sua conta?');
+  if (confirmDelete) {
+    this.deleteAccount();
+  } else {
+    console.log('Exclusão da conta cancelada.');
+  }
+}
+
   deleteAccount(): void {
     if (this.userId !== undefined) {
       this.clientService.deleteUser(this.userId).subscribe(
@@ -137,6 +148,7 @@ export class ReadDataComponent implements OnInit {
           console.log('Conta excluída com sucesso:', response);
           this.authService.logout();
           this.router.navigate(['/']);
+          this.confirmDeleteAccount();
         },
         (error) => {
           console.error('Erro ao excluir conta do usuário: ', error);

@@ -27,6 +27,9 @@ export class AuthService {
   getUserId(): Observable<number> {
     return this.userId;
   }
+  isLoggedIn(): boolean {
+    return this.isAuthenticatedSubject.value;
+  }
 
   private checkAuthenticationStatus(): void {
     const token = localStorage.getItem('token');

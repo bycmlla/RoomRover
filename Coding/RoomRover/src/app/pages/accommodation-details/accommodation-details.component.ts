@@ -16,7 +16,8 @@ export class AccommodationDetailsComponent implements OnInit {
   dataSaida: string = '';
   selectedRoomId: number | null = null;
   userId: number | null = null;
-  
+  error: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -50,24 +51,38 @@ export class AccommodationDetailsComponent implements OnInit {
   }
 
   reserveRoom() {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+  
     if (
       !this.dataEntrada ||
       !this.dataSaida ||
-      !this.selectedRoomId ||
-      !this.userId
+      this.selectedRoomId === null ||
+      this.userId === null
     ) {
       console.error(
         'Por favor, preencha todas as informações necessárias e verifique o login.'
       );
       return;
     }
+    const currentDate = new Date();
+    const selectedDate = new Date(this.dataEntrada);
+    if (selectedDate <= currentDate) {
+      console.error('Insira uma data válida.');
+      this.error = true;
+      return;
+    }
+  
     console.log('ID do quarto selecionado:', this.selectedRoomId);
     const selectedRoomId = Number(this.selectedRoomId);
-
+  
     const room = this.rooms.find((room) => room.idrooms === selectedRoomId);
     if (room) {
       console.log('Quarto encontrado:', room);
       console.log('Preço do quarto:', room.priceroom);
+  
       const reservaData = {
         checkin: this.dataEntrada,
         checkout: this.dataSaida,
@@ -76,6 +91,7 @@ export class AccommodationDetailsComponent implements OnInit {
         idroomfk: selectedRoomId,
       };
       console.log(reservaData);
+  
       this.apiService.reserveRoom(reservaData).subscribe(
         () => {
           console.log('Reserva realizada com sucesso!');
@@ -90,8 +106,11 @@ export class AccommodationDetailsComponent implements OnInit {
           console.error('Erro ao realizar reserva:', error);
         }
       );
+    } else {
+      console.error('Quarto não encontrado.');
     }
   }
+  
 
   currentDate(): Date {
     return new Date();

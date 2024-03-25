@@ -1,10 +1,12 @@
 <app-navbar [redirectOnLogoClick]="'/'"></app-navbar>
 
 <form class="form-login" (ngSubmit)="login()">
-  <h5>Faça login</h5>
+  <h5 [ngClass]="{ 'error-label': loginError }">Faça login</h5>
   <div class="form-row-login">
     <div class="form-group-login">
-      <label for="email">E-mail</label>
+      <label for="email" [ngClass]="{ 'error-label': loginError }"
+        >E-mail</label
+      >
       <input
         type="email"
         placeholder="Digite seu e-mail"
@@ -16,22 +18,24 @@
   </div>
   <div class="form-row-login">
     <div class="form-group-login">
-      <label for="senha">Senha</label>
+      <label for="senha" [ngClass]="{ 'error-label': loginError }">Senha</label>
       <input
-      type="password"
-      placeholder="Digite sua senha"
-      class="form-control-login"
-      [(ngModel)]="password"
-      name="password"
+        type="password"
+        placeholder="Digite sua senha"
+        class="form-control-login"
+        [(ngModel)]="password"
+        name="password"
       />
     </div>
   </div>
-  <button
-  type="submit"
-  class="button-submit-login">
-  Entrar
-
-  </button>
+  <button type="submit" class="button-submit-login">Entrar</button>
+  <div class="d-flex align-items-center flex-column mt-4">
+    <p class="small custom-text">Não tem uma conta ainda?</p>
+    <button class="btn btn-outline-danger btn-custom p-1" routerLink="/signup">Cadastre-se</button>
+  </div>  
+  <div *ngIf="loginError" class="error-message small">
+    <i>Erro no login, tente novamente!</i>
+  </div>
 </form>
 
 <app-footer></app-footer>

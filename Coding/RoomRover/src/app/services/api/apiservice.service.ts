@@ -84,11 +84,15 @@ export class ClientService {
       `http://localhost:8080/form/reservation/list/${userId}`
     );
   }
-  
+
   getReservationDetails(idReservation: number): Observable<Details> {
-    return this.http.get<Details>(`http://localhost:8080/form/reservations/details/${idReservation}`);
+    return this.http.get<Details>(
+      `http://localhost:8080/form/reservations/details/${idReservation}`
+    );
   }
   cancelReservation(idReservation: number): Observable<any> {
-    return this.http.delete<any>(`http://localhost:8080/form/reservations/cancel/${idReservation}`);
+    return this.http.delete<any>(
+      `http://localhost:8080/form/reservations/cancel/${idReservation}`
+    );
   }
 }

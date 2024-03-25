@@ -60,6 +60,7 @@ export class ReservationsComponent implements OnInit {
       () => {
         console.log('Reserva cancelada com sucesso.');
         this.getReservationsForUser(this.userId!);
+        window.location.reload();
       },
       (error) => {
         console.error('Erro ao cancelar reserva:', error);
