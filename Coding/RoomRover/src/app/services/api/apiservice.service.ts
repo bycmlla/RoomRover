@@ -9,6 +9,7 @@ import { Hotel } from 'src/app/models/Hotel/hotel';
 import { Room } from 'src/app/models/Room/room';
 import { Reservation } from 'src/app/models/Reservation/reservation';
 import { Details } from 'src/app/models/ReservationDetails/details';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -95,4 +96,5 @@ export class ClientService {
       `http://localhost:8080/form/reservations/cancel/${idReservation}`
     );
   }
+  
 }
