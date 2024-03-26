@@ -3,112 +3,61 @@
   src: url(../../../assets/fonts/Inter-Medium.ttf);
 }
 
-.navbar-container {
-  position: relative;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
+.navbar-container .toolbar {
+  background: linear-gradient(#dd5f18, rgb(254, 172, 125));
+  color: white;
 
-  .toolbar {
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(#dd5f18, rgb(254, 172, 125));
-    color: white;
-    text-align: center;
-    position: relative;
-
-    .logo-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .logo-name {
-        font-family: inter;
-        font-size: 18px;
-        margin: 17px 40px 0 40px;
-        cursor: pointer;
-        line-height: 50px;
-        font-weight: 600;
-      }
-
-      .actions {
-        display: flex;
-        gap: 10px;
-
-        .register,
-        .login,
-        .my-data {
-          color: rgb(28, 28, 28);
-          background-color: white;
-          border: none;
-          border-radius: 2px;
-          font-size: 13px;
-          padding: 2px 14px 4px;
-          margin-top: 10px;
-        }
-        .login {
-          margin-right: 35px;
-        }
-        .my-data, i{
-          margin-right: 35px;
-          cursor: pointer;
-        }
-
-      }
-    }
-
-    .navigation {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .hospedagem-button, .reservas-button {
-      color: rgb(255, 255, 255);
-      background-color: rgba(101, 101, 101, 0.18);
-      border: solid 1px white;
-      border-radius: 15px;
-      font-size: 13px;
-      padding: 6px 30px;
-    }
-
+  .logo-actions .logo-name {
+    font-family: inter;
+    cursor: pointer;
+    line-height: 50px;
   }
-  .text-banner {
-    text-align: start;
-    margin: 40px 0 20px 25px;
-  }
-  .teste {
-    position: relative;
-    top: 30px;
-    margin-left: 15px;
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-    max-width: 98%;
 
-    .select-filter {
-      border: solid 1px rgba(0, 0, 0, 0.401);
-      border-radius: 4px;
-      font-size: 15px;
-      width: 100%;
-      box-sizing: border-box;
-      box-shadow: 0 4px 2px rgba(0, 0, 0, 0.4);
-    }
+  .logo-actions .actions .register,
+  .logo-actions .actions .login,
+  .logo-actions .actions .my-data {
+    color: rgb(28, 28, 28);
+    background-color: white;
+    font-size: 13px;
+  }
+
+  .logo-actions .actions .my-data,
+  .logo-actions .actions i {
+    cursor: pointer;
+  }
+
+  .navigation {
+    gap: 20px;
+  }
+
+  .hospedagem-button,
+  .reservas-button {
+    color: rgb(255, 255, 255);
+    background-color: rgba(101, 101, 101, 0.18);
+    border: solid 1px white;
+    font-size: 13px;
+    padding: 6px 30px;
+  }
+}
+
+.teste {
+  top: 30px;
+  gap: 10px;
+  max-width: 98%;
+
+  .select-filter {
+    border: solid 1px rgba(0, 0, 0, 0.401);
+    box-sizing: border-box;
+    box-shadow: 0 4px 2px rgba(0, 0, 0, 0.4);
   }
 }
 
 @media screen and (min-width: 768px) {
-  .toolbar {
-    .logo-name {
-      margin: 10px auto;
-    }
+  .toolbar .logo-name {
+    margin: 10px auto;
+  }
 
-    .actions {
-      .login {
-        margin-right: 10%;
-      }
-    }
+  .toolbar .actions .login {
+    margin-right: 10%;
   }
 }

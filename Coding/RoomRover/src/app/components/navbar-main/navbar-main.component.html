@@ -1,15 +1,15 @@
-<div class="navbar-container">
-  <div class="toolbar">
-    <div class="logo-actions">
-      <div class="logo-name" (click)="onLogoClick()">
+<div class="navbar-container w-100 position-relative top-0 start-0 end-0">
+  <div class="toolbar d-flex flex-column text-center position-relative">
+    <div class="logo-actions d-flex justify-content-between align-items-center">
+      <div class="logo-name fw-bold mt-3 mx-4 fs-6" (click)="onLogoClick()">
         <a>{{ redirectOnLogoClick ? "RoomRover.com" : "RoomRover.com" }}</a>
       </div>
-      <div class="actions">
+      <div class="actions d-flex">
         <button
           *ngIf="!isAuthenticated"
           type="button"
           routerLink="signup"
-          class="register"
+          class="register rounded rounded-0 border-0 py-1 px-3 mt-2"
         >
           Cadastre-se
         </button>
@@ -17,7 +17,7 @@
           *ngIf="!isAuthenticated"
           type="button"
           routerLink="login"
-          class="login"
+          class="login rounded rounded-0 border-0 py-1 px-3 mt-2 me-4"
         >
           Login
         </button>
@@ -26,19 +26,23 @@
             *ngIf="isAuthenticated"
             type="button"
             (click)="myData()"
-            class="my-data"
+            class="my-data rounded rounded-0 border-0 py-1 px-3 mt-2 mx-5"
           >
             Meus Dados
           </button>
-          <i *ngIf="isAuthenticated" class="bi bi-box-arrow-right m-3" (click)="logout()"></i>
+          <i
+            *ngIf="isAuthenticated"
+            class="bi bi-box-arrow-right m-3 me-4"
+            (click)="logout()"
+          ></i>
         </div>
       </div>
     </div>
-    <div class="navigation">
+    <div class="navigation d-flex justify-content-center align-items-center">
       <button
         type="button"
         routerLink="accommodations"
-        class="hospedagem-button"
+        class="hospedagem-button rounded-4"
       >
         Hospedagens
       </button>
@@ -46,37 +50,37 @@
         *ngIf="isAuthenticated"
         type="button"
         routerLink="reservations"
-        class="reservas-button"
+        class="reservas-button rounded-4"
       >
         Minhas reservas
       </button>
     </div>
-    <div class="text-banner">
+    <div class="text-banner text-start mt-5 mb-3 ml-4 ms-4">
       <h2>Encontre sua próxima estadia</h2>
       <span
         >Encontre as melhores ofertas de hotéis para sua melhor estadia...</span
       >
     </div>
-    <div class="teste">
-      <select class="form-select select-filter">
+    <div class="teste position-relative mb-2 ms-3 mt-2 ml-2 d-flex">
+      <select class="form-select select-filter rounded fs-6 w-100">
         <option selected>Cidade</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
       </select>
-      <select class="form-select select-filter">
+      <select class="form-select select-filter rounded fs-6 w-100">
         <option selected>Data de check-in</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
       </select>
-      <select class="form-select select-filter">
+      <select class="form-select select-filter rounded fs-6 w-100">
         <option selected>Data de check-out</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
       </select>
-      <select class="form-select select-filter">
+      <select class="form-select select-filter rounded fs-6 w-100">
         <option selected>N° pessoas</option>
         <option value="1">One</option>
         <option value="2">Two</option>
